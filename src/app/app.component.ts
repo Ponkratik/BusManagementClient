@@ -11,15 +11,20 @@ export class AppComponent {
   title = 'BusManagementClient';
   isLoggedIn = false;
 
-  storedUser: User = {
+  /*storedUser: User = {
     login: '',
     email: '',
     lastName: '',
     firstName: '',
     surName: '',
     phone: '',
-    role: ''
-  }
+    roleByRoleId: {
+      roleId: 0,
+      roleName: ''
+    }
+  }*/
+
+  storedUser: User = new User();
 
   showTransportManagementPage = false;
   showRouteManagementPage = false;
@@ -33,18 +38,18 @@ export class AppComponent {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.storedUser.role = user.roles[0];
-      this.storedUser.login = user.login;
+      this.storedUser.roleByRoleId.roleName = user.roles[0];
+      this.storedUser.login = user.userName;
       this.storedUser.email = user.email;
       this.storedUser.lastName = user.lastName;
       this.storedUser.firstName = user.firstName;
       this.storedUser.surName = user.surName;
       this.storedUser.phone = user.phone;
 
-      this.showDriverPage = this.storedUser.role == ('ROLE_DRIVER');
-      this.showRouteManagementPage = this.storedUser.role == ('ROLE_DISPATCHER');
-      this.showUserManagementPage = this.storedUser.role == ('ROLE_SYSADMIN');
-      this.showTransportManagementPage = this.storedUser.role == ('ROLE_GARAGEMANAGER');
+      this.showDriverPage = this.storedUser.roleByRoleId.roleName == ('ROLE_DRIVER');
+      this.showRouteManagementPage = this.storedUser.roleByRoleId.roleName == ('ROLE_DISPATCHER');
+      this.showUserManagementPage = this.storedUser.roleByRoleId.roleName == ('ROLE_SYSADMIN');
+      this.showTransportManagementPage = this.storedUser.roleByRoleId.roleName == ('ROLE_GARAGEMANAGER');
     }
   }
 

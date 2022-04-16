@@ -11,11 +11,16 @@ import { TokenStorageService } from '../../_services/token-storage.service';
 })
 export class LoginComponent implements OnInit {
 
-  form: User = {
+  /*form: User = {
     login: '',
     password: '',
-    role: ''
-  };
+    roleByRoleId: {
+      roleId: 0,
+      roleName: ''
+    }
+  };*/
+
+  form: User = new User();
 
   isLoggedIn = false;
   isLoginFailed = false;
@@ -26,7 +31,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.form.role = this.tokenStorage.getUser().roles[0];
+      this.form.roleByRoleId.roleName = this.tokenStorage.getUser().roles[0];
     }
   }
 
@@ -38,7 +43,8 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.form.role = this.tokenStorage.getUser().roles[0];
+        console.log(data);
+        this.form.roleByRoleId.roleName = this.tokenStorage.getUser().roles[0];
         this.redirectToHomePage();
         this.reloadPage();
       },

@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { UserpageComponent } from './components/userpage/userpage.component';
+import { UserpageUpdateComponent } from './components/userpage-update/userpage-update.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserpageComponent } from './components/userpage/userpage.component';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    UserpageComponent
+    UserpageComponent,
+    UserpageUpdateComponent
   ],
   imports: [
     FormsModule,

@@ -9,18 +9,7 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  /*form: any = {
-    login: null,
-    password: null,
-    email: null,
-    lastName: null,
-    firstName: null,
-    surName: null,
-    phone: null,
-    role: null
-  };*/
-
-  form: User = {
+  /*form1: User = {
     login: '',
     password: '',
     email: '',
@@ -28,8 +17,13 @@ export class RegisterComponent implements OnInit {
     firstName: '',
     surName: '',
     phone: '',
-    role: ''
-  };
+    roleByRoleId: {
+      roleId: 0,
+      roleName: ''
+    }
+  };*/
+
+  form: User = new User();
 
   isSuccessful = false;
   isSignUpFailed = false;
@@ -41,8 +35,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { login, password, email, lastName, firstName, surName, phone, role } = this.form;
-    this.authService.register(login!, password!, email!, lastName!, firstName!, surName!, phone!, role!).subscribe({
+    const { login, password, email, lastName, firstName, surName, phone, roleByRoleId } = this.form;
+    this.authService.register(login!, password!, email!, lastName!, firstName!, surName!, phone!, roleByRoleId.roleName!).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
