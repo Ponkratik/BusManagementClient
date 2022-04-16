@@ -38,7 +38,7 @@ export class AppComponent {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.storedUser.roleByRoleId.roleName = user.roles[0];
+      this.storedUser.roleByRoleId = user.roleByRoleId[0];
       this.storedUser.login = user.userName;
       this.storedUser.email = user.email;
       this.storedUser.lastName = user.lastName;

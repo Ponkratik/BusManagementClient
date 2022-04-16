@@ -9,5 +9,6 @@ export class User {
     firstName?: string;
     surName?: string;
     phone?: string;
+    blocked?: boolean;
     roleByRoleId!: Role;
 }

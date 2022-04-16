@@ -13,6 +13,9 @@ export class UserpageUpdateComponent implements OnInit {
   id!: number;
   user: User = new User();
 
+  isSuccessful = false;
+  errorMessage = '';
+
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -27,12 +30,15 @@ export class UserpageUpdateComponent implements OnInit {
     })
   }
 
-  onSubmmit() {
+  onSubmit() {
     this.userService.update(this.id, this.user).subscribe(
       data => {
+        this.isSuccessful = true;
         this.goToUsersList();
       },
       error => {
+        this.isSuccessful = false;
+        this.errorMessage = error.error.message;
         console.log(error);
       }
     )

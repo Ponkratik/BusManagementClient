@@ -12,6 +12,7 @@
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Должность</th>
+            <th>Блокировка</th>
             <th>Действия</th>
         </tr>
     </thead>
@@ -20,10 +21,10 @@
             <td> {{ user.lastName }} </td>
             <td> {{ user.firstName }} </td>
             <td> {{ user.roleByRoleId.roleName }} </td>
+            <td> {{ user.blocked }} </td>
             <td>
-                <button (click) = "updateUser(user.userId)" class = "btn btn-primary">Update</button>
-                <!--<button (click) = "deleteEmployee(employee.id)" class = "btn btn-danger" style="margin-left: 10px">Delete</button>
-                <button (click) = "employeeDetails(employee.id)" class = "btn btn-primary" style="margin-left: 10px">View</button>-->
+                <button (click) = "updateUser(user.userId)" class = "btn btn-primary">Изменить</button>
+                <button (click) = "deleteUser(user.userId)" class = "btn btn-danger" style="margin-left: 10px">Удалить</button>
             </td>
         </tr>
     </tbody>

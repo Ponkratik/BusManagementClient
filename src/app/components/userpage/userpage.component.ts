@@ -31,4 +31,12 @@ export class UserpageComponent implements OnInit {
     this.router.navigate(['usermanagement/update', id]);
   }
 
+  deleteUser(id: number) {
+    this.userService.delete(id).subscribe(
+      data => {
+        this.getAllUsers();
+      }
+    )
+  }
+
 }

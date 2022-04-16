@@ -1,1 +1,78 @@
-<p>userpage-update works!</p>
+<div class="row">
+    <div class="card col-md-6 offset-md-3 offset-md-3">
+        <div class="row">
+            <h3 class="text-center">Обновить пользователя</h3>
+            <hr />
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group">
+                    <label for="login">Логин</label>
+                    <input type="text" class="form-control" name="login" [(ngModel)]="user.login" required minlength="3"
+                        maxlength="40" #login="ngModel" />
+                    <div class="alert-danger" *ngIf="login.errors && f.submitted">
+                        <div *ngIf="login.errors['required']">Логин необходим</div>
+                        <div *ngIf="login.errors['minlength']">
+                            Логин должен быть длиной более 3 символов
+                        </div>
+                        <div *ngIf="login.errors['maxlength']">
+                            Логин должен быть длиной менее 40 символов
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required email
+                        #email="ngModel" />
+                    <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                        <div *ngIf="email.errors['required']">Email необходим</div>
+                        <div *ngIf="email.errors['email']">
+                            Email должен быть корректным
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Фамилия</label>
+                    <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" required
+                        #lastName="ngModel" />
+                    <div class="alert-danger" *ngIf="lastName.errors && f.submitted">
+                        <div *ngIf="lastName.errors['required']">Фамилия необходима</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Имя</label>
+                    <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" required
+                        #firstName="ngModel" />
+                    <div class="alert-danger" *ngIf="firstName.errors && f.submitted">
+                        <div *ngIf="firstName.errors['required']">Имя необходимо</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="surName">Отчество</label>
+                    <input type="text" class="form-control" name="surName" [(ngModel)]="user.surName"
+                        #surName="ngModel" />
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" class="form-control" name="phone" [(ngModel)]="user.phone" required
+                        #email="ngModel" />
+                    <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                        <div *ngIf="email.errors['required']">Телефон необходим</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roleName">Роль</label>
+                    <input type="text" class="form-control" name="roleName" [(ngModel)]="user.roleByRoleId.roleName"
+                        required #roleName="ngModel" />
+                    <div class="alert-danger" *ngIf="roleName.errors && f.submitted">
+                        <div *ngIf="roleName.errors['required']">Роль необходима</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Обновить данные</button>
+                </div>
+                <div class="alert alert-warning" *ngIf="f.submitted && !isSuccessful">
+                    Обновить данные не удалось:<br />{{ errorMessage }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

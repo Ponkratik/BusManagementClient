@@ -26,4 +26,8 @@ export class UserService {
   update(id: number, user: User): Observable<any> {
     return this.http.put(AUTH_API + 'update/' + id, user, httpOptions); 
   }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(AUTH_API + 'block/' + id, httpOptions);
+  }
 }
