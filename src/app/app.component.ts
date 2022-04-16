@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from './models/user.model';
 import { TokenStorageService } from './_services/token-storage.service';
 
 @Component({
@@ -8,14 +9,17 @@ import { TokenStorageService } from './_services/token-storage.service';
 })
 export class AppComponent {
   title = 'BusManagementClient';
-  private roles: string[] = [];
   isLoggedIn = false;
-  login?: string;
-  email?: string;
-  lastName?: string;
-  firstName?: string;
-  surName?: string;
-  phone?: string;
+
+  storedUser: User = {
+    login: '',
+    email: '',
+    lastName: '',
+    firstName: '',
+    surName: '',
+    phone: '',
+    role: ''
+  }
 
   showTransportManagementPage = false;
   showRouteManagementPage = false;
@@ -29,18 +33,18 @@ export class AppComponent {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.role;
-      this.login = user.login;
-      this.email = user.email;
-      this.lastName = user.lastName;
-      this.firstName = user.firstName;
-      this.surName = user.surName;
-      this.phone = user.phone;
+      this.storedUser.role = user.roles[0];
+      this.storedUser.login = user.login;
+      this.storedUser.email = user.email;
+      this.storedUser.lastName = user.lastName;
+      this.storedUser.firstName = user.firstName;
+      this.storedUser.surName = user.surName;
+      this.storedUser.phone = user.phone;
 
-      this.showDriverPage = this.roles.includes('ROLE_DRIVER');
-      this.showRouteManagementPage = this.roles.includes('ROLE_DISPATCHER');
-      this.showUserManagementPage = this.roles.includes('ROLE_SYSADMIN');
-      this.showTransportManagementPage = this.roles.includes('ROLE_GARAGEMANAGER');
+      this.showDriverPage = this.storedUser.role == ('ROLE_DRIVER');
+      this.showRouteManagementPage = this.storedUser.role == ('ROLE_DISPATCHER');
+      this.showUserManagementPage = this.storedUser.role == ('ROLE_SYSADMIN');
+      this.showTransportManagementPage = this.storedUser.role == ('ROLE_GARAGEMANAGER');
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from '../../_services/auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  form: any = {
+  /*form: any = {
     login: null,
     password: null,
     email: null,
@@ -17,6 +18,17 @@ export class RegisterComponent implements OnInit {
     surName: null,
     phone: null,
     role: null
+  };*/
+
+  form: User = {
+    login: '',
+    password: '',
+    email: '',
+    lastName: '',
+    firstName: '',
+    surName: '',
+    phone: '',
+    role: ''
   };
 
   isSuccessful = false;
@@ -30,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     const { login, password, email, lastName, firstName, surName, phone, role } = this.form;
-    this.authService.register(login, password, email, lastName, firstName, surName, phone, role).subscribe({
+    this.authService.register(login!, password!, email!, lastName!, firstName!, surName!, phone!, role!).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
