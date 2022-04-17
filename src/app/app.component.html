@@ -24,6 +24,11 @@
         <a href="/usermanagement" class="nav-link" routerLink="usermanagement">Пользователи</a>
       </li>
     </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="showTransportManagementPage">
+      <li class="nav-item">
+        <a href="/busmanagement" class="nav-link" routerLink="busmanagement">Автобусы</a>
+      </li>
+    </ul>
   </nav>
   <div class="container">
     <router-outlet></router-outlet>

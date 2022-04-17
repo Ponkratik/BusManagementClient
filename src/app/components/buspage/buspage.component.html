@@ -1,1 +1,28 @@
-<p>buspage works!</p>
+<div class = "row h2 my-4 text-center">
+    <p>Список автобусов</p>
+</div>
+<div class="text-end">
+    <button (click) = "navigateAdd()" class = "btn btn-primary mb-1">Добавить автобус</button>
+</div>
+<table class = "table table-striped table-bordered table-hover align-middle text-center">
+    <thead>
+        <tr>
+            <th>Модель</th>
+            <th>Гос.номер</th>
+            <th>Мест</th>
+            <th>VIN</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let bus of buses" >
+            <td> {{ bus.busModel }} </td>
+            <td> {{ bus.number }} </td>
+            <td> {{ bus.seatsQty }} </td>
+            <td> {{ bus.vin }} </td>
+            <td>
+                <button (click) = "navigateUpdate(bus.busId)" class = "btn btn-primary">Изменить</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

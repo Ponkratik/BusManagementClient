@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4">
+        <div class="row">
+            <h3 class="text-center">Добавить автобус</h3>
+            <hr />
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="busModel">Модель</label>
+                    <input type="text" class="form-control" name="busModel" [(ngModel)]="bus.busModel" required minlength="1"
+                        maxlength="60" #busModel="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="busModel.errors && f.submitted">
+                        <div *ngIf="busModel.errors['required']">Модель необходима</div>
+                        <div *ngIf="busModel.errors['minlength']">
+                            Модель должна быть длиной более 1 символа
+                        </div>
+                        <div *ngIf="busModel.errors['maxlength']">
+                            Модель должна быть длиной менее 60 символов
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="number">Гос.номер</label>
+                    <input type="text" class="form-control" name="number" [(ngModel)]="bus.number" required minlength="8"
+                    maxlength="8" #number="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="number.errors && f.submitted">
+                        <div *ngIf="number.errors['required']">Гос.номер необходим</div>
+                        <div *ngIf="number.errors['minlength']">
+                            Гос.номер должен быть длиной 8 символов
+                        </div>
+                        <div *ngIf="number.errors['maxlength']">
+                            Гос.номер должен быть длиной 8 символов
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="seatsQty">Мест</label>
+                    <input type="number" class="form-control" name="seatsQty" [(ngModel)]="bus.seatsQty" required min="1"
+                        #seatsQty="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="seatsQty.errors && f.submitted">
+                        <div *ngIf="seatsQty.errors['required']">Количество мест необходимо</div>
+                        <div *ngIf="seatsQty.errors['min']">Количество мест должно быть положительным</div>
+                    </div>
+                </div>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="vin">VIN-номер</label>
+                    <input type="vin" class="form-control" name="vin" [(ngModel)]="bus.vin" required minlength="17"
+                    maxlength="17" #vin="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="vin.errors && f.submitted">
+                        <div *ngIf="vin.errors['required']">VIN-номер необходим</div>
+                        <div *ngIf="vin.errors['minlength']">
+                            VIN-номер должен быть длиной 17 символов
+                        </div>
+                        <div *ngIf="vin.errors['maxlength']">
+                            VIN-номер должен быть длиной 17 символов
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block mt-4 text-center">Добавить автобус</button>
+                </div>
+                <div class="alert alert-warning my-2" *ngIf="f.submitted && !isSuccessful">
+                    Ошибка:<br />{{ errorMessage }}
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <p class="text-center fw-light my-2 text-decoration-underline">
+            <a (click)="navigateToList()">Вернуться</a>
+        </p>
+    </div>
+</div>

@@ -14,6 +14,7 @@ import { UserpageComponent } from './components/userpage/userpage.component';
 import { UserpageUpdateComponent } from './components/userpage-update/userpage-update.component';
 import { BuspageComponent } from './components/buspage/buspage.component';
 import { BuspageUpdateComponent } from './components/buspage-update/buspage-update.component';
+import { BuspageAddComponent } from './components/buspage-add/buspage-add.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BuspageUpdateComponent } from './components/buspage-update/buspage-upda
     UserpageComponent,
     UserpageUpdateComponent,
     BuspageComponent,
-    BuspageUpdateComponent
+    BuspageUpdateComponent,
+    BuspageAddComponent
   ],
   imports: [
     FormsModule,
