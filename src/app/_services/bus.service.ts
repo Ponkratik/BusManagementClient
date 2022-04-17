@@ -24,7 +24,7 @@ export class BusService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(API + 'delete' + id, httpOptions);
+    return this.http.delete(API + 'delete/' + id, httpOptions);
   }
 
   add(bus: Bus): Observable<any> {

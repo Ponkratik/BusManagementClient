@@ -10,6 +10,7 @@ import { BusService } from 'src/app/_services/bus.service';
 })
 export class BuspageComponent implements OnInit {
   buses?: Bus[];
+  allBuses?: Bus[];
 
   constructor(private busService: BusService, private router: Router) { }
 
@@ -20,12 +21,28 @@ export class BuspageComponent implements OnInit {
   private getAll() {
     this.busService.getAll().subscribe({
       next: data => {
-        this.buses = data;
+        this.allBuses = data;
+        this.buses = this.allBuses;
       },
       error: error => {
 
       }
     })
+  }
+
+  applyFilter(event: any) {
+    let filterValueLower = event.target.value.toLowerCase();
+    if (event.target.value === '') {
+      this.buses = this.allBuses;
+    } else {
+      //console.log(this.buses);
+      this.buses = this.buses?.filter((bus) => {
+        bus.busModel?.toLowerCase().includes(filterValueLower)
+        || bus.number?.toLowerCase().includes(filterValueLower)
+        || bus.vin?.toLowerCase().includes(filterValueLower)
+      });
+      //console.log(this.buses);
+    }
   }
 
   navigateAdd() {

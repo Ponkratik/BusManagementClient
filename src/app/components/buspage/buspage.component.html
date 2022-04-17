@@ -1,8 +1,13 @@
 <div class = "row h2 my-4 text-center">
     <p>Список автобусов</p>
 </div>
-<div class="text-end">
-    <button (click) = "navigateAdd()" class = "btn btn-primary mb-1">Добавить автобус</button>
+<div class="row">
+    <div class="col text-start">
+        <button (click)="navigateAdd()" class="btn btn-primary mb-1">Добавить автобус</button>
+    </div>
+    <div class="col-3 text-end">
+        <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
+    </div>
 </div>
 <table class = "table table-striped table-bordered table-hover align-middle text-center">
     <thead>
