@@ -12,6 +12,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { UserpageUpdateComponent } from './components/userpage-update/userpage-update.component';
+import { BuspageComponent } from './components/buspage/buspage.component';
+import { BuspageUpdateComponent } from './components/buspage-update/buspage-update.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { UserpageUpdateComponent } from './components/userpage-update/userpage-u
     HomeComponent,
     ProfileComponent,
     UserpageComponent,
-    UserpageUpdateComponent
+    UserpageUpdateComponent,
+    BuspageComponent,
+    BuspageUpdateComponent
   ],
   imports: [
     FormsModule,
