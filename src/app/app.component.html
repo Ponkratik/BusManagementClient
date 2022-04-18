@@ -6,19 +6,6 @@
         <a href="/home" class="nav-link" routerLink="home">Главная</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/signin" class="nav-link" routerLink="signin">Вход</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ storedUser.login }}</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">Выход</a>
-      </li>
-    </ul>
     <ul class="navbar-nav ml-auto" *ngIf="showUserManagementPage">
       <li class="nav-item">
         <a href="/usermanagement" class="nav-link" routerLink="usermanagement">Пользователи</a>
@@ -27,6 +14,23 @@
     <ul class="navbar-nav ml-auto" *ngIf="showTransportManagementPage">
       <li class="nav-item">
         <a href="/busmanagement" class="nav-link" routerLink="busmanagement">Автобусы</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ms-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/signin" class="nav-link" routerLink="signin">Вход</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="profileDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Аккаунт
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="profileDropdownMenuLink">
+          <li><a href="/profile" class="dropdown-item" routerLink="profile">{{ storedUser.login }}</a></li>
+          <li><a href class="dropdown-item" (click)="logout()">Выход</a></li>
+        </ul>
       </li>
     </ul>
   </nav>
