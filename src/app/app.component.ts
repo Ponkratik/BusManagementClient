@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable, Subscriber } from 'rxjs';
 import { User } from './models/user.model';
 import { TokenStorageService } from './_services/token-storage.service';
 
@@ -10,19 +11,10 @@ import { TokenStorageService } from './_services/token-storage.service';
 export class AppComponent {
   title = 'BusManagementClient';
   isLoggedIn = false;
-
-  /*storedUser: User = {
-    login: '',
-    email: '',
-    lastName: '',
-    firstName: '',
-    surName: '',
-    phone: '',
-    roleByRoleId: {
-      roleId: 0,
-      roleName: ''
-    }
-  }*/
+  
+  date = new Observable<string>((observer: Subscriber<string>) => {
+    setInterval(() => observer.next(new Date().toString()), 1000);
+    });
 
   storedUser: User = new User();
 

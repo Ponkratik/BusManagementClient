@@ -16,7 +16,13 @@
         <a href="/busmanagement" class="nav-link" routerLink="busmanagement">Автобусы</a>
       </li>
     </ul>
-
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+          <div class="text-light">
+            {{ date | async | date:'HH:mm:ss dd.MM.yyyy' }}
+          </div>
+      </li>
+    </ul>
     <ul class="navbar-nav ms-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
         <a href="/signin" class="nav-link" routerLink="signin">Вход</a>
