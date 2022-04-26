@@ -11,15 +11,6 @@ import { TokenStorageService } from '../../_services/token-storage.service';
 })
 export class LoginComponent implements OnInit {
 
-  /*form: User = {
-    login: '',
-    password: '',
-    roleByRoleId: {
-      roleId: 0,
-      roleName: ''
-    }
-  };*/
-
   form: User = new User();
 
   isLoggedIn = false;

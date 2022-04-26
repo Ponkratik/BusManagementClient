@@ -1,74 +1,39 @@
-<div class="col-md-12">
-    <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <form
-        *ngIf="!isLoggedIn"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form-group">
-          <label for="login">Логин</label>
-          <input
-            type="text"
-            class="form-control"
-            name="login"
-            [(ngModel)]="form.login"
-            required
-            #login="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="login.errors && f.submitted"
-          >
-            Логин не введен
-          </div>
+<div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4">
+  <div class="row">
+    <h3 class="text-center">Вход в систему</h3>
+    <hr />
+    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group text-start">
+        <label class="ms-1 my-1" for="login">Логин</label>
+        <input type="text" class="form-control" name="login" [(ngModel)]="form.login" required #login="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="login.errors && f.submitted">
+          Логин не введен
         </div>
-        <div class="form-group">
-          <label for="password">Пароль</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            [(ngModel)]="form.password"
-            required
-            minlength="6"
-            #password="ngModel"
-          />
-          <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="password.errors && f.submitted"
-          >
-            <div *ngIf="password.errors['required']">Пароль не введен</div>
-            <div *ngIf="password.errors['minlength']">
-              Пароль должен быть длиной более 6 символов
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block">
-            Вход
-          </button>
-        </div>
-        <div class="form-group">
-          <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="f.submitted && isLoginFailed"
-          >
-            Вход не удался: {{ errorMessage }}
-          </div>
-        </div>
-      </form>
-      <div class="alert alert-success" *ngIf="isLoggedIn">
-        Вход выполен как {{ form.roleByRoleId.roleName }}.
       </div>
+      <div class="form-group text-start">
+        <label class="ms-1 my-1" for="password">Пароль</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+          #password="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']">Пароль не введен</div>
+          <div *ngIf="password.errors['minlength']">
+            Пароль должен быть длиной более 6 символов
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block mt-4 text-center">
+          Вход
+        </button>
+      </div>
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+          Вход не удался: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Вход выполен как {{ form.roleByRoleId.roleName }}.
     </div>
   </div>
+</div>
