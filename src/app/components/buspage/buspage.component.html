@@ -12,10 +12,14 @@
 <table class = "table table-striped table-bordered table-hover align-middle text-center">
     <thead>
         <tr>
-            <th><a (click)="applySort1()">Модель</a></th>
+            <!-- <th><a (click)="applySort1()">Модель</a></th> 
             <th><a (click)="applySort2()">Гос.номер</a></th>
             <th><a (click)="applySort3()">Мест</a></th>
-            <th><a (click)="applySort4()">VIN</a></th>
+            <th><a (click)="applySort4()">VIN</a></th> -->
+            <th><a id="busModel" (click)="applySortTest($event)">Модель</a></th>
+            <th><a id="number" (click)="applySortTest($event)">Гос.номер</a></th>
+            <th><a id="seatsQty" (click)="applySortTest($event)">Мест</a></th>
+            <th><a id="vin" (click)="applySortTest($event)">VIN</a></th>
             <th>Действия</th>
         </tr>
     </thead>

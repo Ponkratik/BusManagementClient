@@ -12,7 +12,7 @@ export class BuspageAddComponent implements OnInit {
   bus: Bus = new Bus();
 
   isSuccessful = false;
-  errorMessage = ''
+  errorMessage = '';
 
   constructor(private busService: BusService, private router: Router) { }
 
