@@ -39,7 +39,6 @@ export class CityListComponent implements OnInit {
 
   applyFilter(event: any) {
     let filterValueLower = event.target.value.toLowerCase();
-    console.log(filterValueLower);
     if (event.target.value === '') {
       this.cities = this.allCities;
     } else {
