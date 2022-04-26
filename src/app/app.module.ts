@@ -15,6 +15,9 @@ import { UserpageUpdateComponent } from './components/userpage-update/userpage-u
 import { BuspageComponent } from './components/buspage/buspage.component';
 import { BuspageUpdateComponent } from './components/buspage-update/buspage-update.component';
 import { BuspageAddComponent } from './components/buspage-add/buspage-add.component';
+import { CityAddComponent } from './components/city-add/city-add.component';
+import { CityUpdateComponent } from './components/city-update/city-update.component';
+import { CityListComponent } from './components/city-list/city-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { BuspageAddComponent } from './components/buspage-add/buspage-add.compon
     UserpageUpdateComponent,
     BuspageComponent,
     BuspageUpdateComponent,
-    BuspageAddComponent
+    BuspageAddComponent,
+    CityAddComponent,
+    CityUpdateComponent,
+    CityListComponent
   ],
   imports: [
     FormsModule,

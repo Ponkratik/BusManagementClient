@@ -9,6 +9,9 @@ import { UserpageUpdateComponent } from './components/userpage-update/userpage-u
 import { BuspageComponent } from './components/buspage/buspage.component';
 import { BuspageUpdateComponent } from './components/buspage-update/buspage-update.component';
 import { BuspageAddComponent } from './components/buspage-add/buspage-add.component';
+import { CityListComponent } from './components/city-list/city-list.component';
+import { CityUpdateComponent } from './components/city-update/city-update.component';
+import { CityAddComponent } from './components/city-add/city-add.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -19,6 +22,9 @@ const routes: Routes = [
   { path: 'busmanagement', component: BuspageComponent },
   { path: 'busmanagement/update/:id', component: BuspageUpdateComponent },
   { path: 'busmanagement/add', component: BuspageAddComponent },
+  { path: 'citymanagement', component: CityListComponent },
+  { path: 'citymanagement/update/:id', component: CityUpdateComponent },
+  { path: 'citymanagement/add', component: CityAddComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
