@@ -12,12 +12,7 @@ import { CsvexportService } from 'src/app/_services/csvexport.service';
 export class BuspageComponent implements OnInit {
   buses?: Bus[];
   allBuses?: Bus[];
-
-  sortDir1 = true;
-  sortDir2 = true;
-  sortDir3 = true;
-  sortDir4 = true;
-
+  
   sortDir?: boolean[] = [true, true, true, true, true];
 
   constructor(private busService: BusService, private csvExportService: CsvexportService, private router: Router) { }
@@ -39,28 +34,33 @@ export class BuspageComponent implements OnInit {
   }
 
   saveTable() {
-    this.csvExportService.downloadFile(this.buses!, 'busesList', ['busId', 'busModel', 'number', 'seatsQty', 'vin']);
+    this.csvExportService.downloadFile(this.buses!, 'busesList', Object.getOwnPropertyNames(this.buses![0]));
   }
 
   applyFilter(event: any) {
     let filterValueLower = event.target.value.toLowerCase();
+    console.log(filterValueLower);
     if (event.target.value === '') {
       this.buses = this.allBuses;
     } else {
-      this.buses = this.buses?.filter((bus: Bus) => 
-      bus.busModel?.toLowerCase().includes(filterValueLower)
-      || bus.number?.toLowerCase().includes(filterValueLower)
-      || bus.vin?.toLowerCase().includes(filterValueLower));
-    }
+      this.buses = this.buses?.filter((bus: Bus) =>{
+        for (var property in bus) {
+          const value = bus[property as keyof Bus];
+          if (typeof value === "string" && value.toLowerCase().includes(filterValueLower)) {
+            return true;
+          }
+
+          if (typeof value === "number" && value === Number.parseInt(filterValueLower)) {
+            return true;
+          }
+        }
+
+        return false;
+      });
   }
+}
 
   applySortTest(event: any) {
-    //console.log(event.target.id);
-    let tempBus = this.buses![0];
-    // console.log(tempBus);
-    // console.log(Object.getOwnPropertyNames(tempBus));
-    // console.log(tempBus['busModel']);
-
     //получение всех свойств
     let properties = Object.getOwnPropertyNames(this.buses![0]);
     //ключ сортировки
@@ -96,170 +96,6 @@ export class BuspageComponent implements OnInit {
 
         if (typeof key1 === "number" && typeof key2 === "number") {
           return key1! < key2! ? 1 : -1;
-        }
-
-        return 0;
-      });
-    }
-
-
-
-    // this.buses = this.buses!.sort((bus1: Bus, bus2: Bus) => {
-    //   const key1 = bus1[sortKey as keyof Bus];
-    //   const key2 = bus2[sortKey as keyof Bus];
-
-    //   console.log(key1, typeof key1);
-    //   console.log(this.sortDir![sortColumnId]);
-      
-    //   if (typeof key1 === "string" && typeof key2 === "string") {
-    //     if ((key1!.toLowerCase() > key2!.toLowerCase() && this.sortDir![sortColumnId]) || (key1!.toLowerCase() < key2!.toLowerCase() && this.sortDir![sortColumnId])) {
-    //       return 1;
-    //     }
-  
-    //     if ((key1!.toLowerCase() < key2!.toLowerCase() && this.sortDir![sortColumnId]) || (key1!.toLowerCase() > key2!.toLowerCase() && this.sortDir![sortColumnId])) {
-    //       return -1;
-    //     }
-    //   }
-
-
-    //   if (typeof key1 === "number" && typeof key2 === "number") {
-    //     if ((key1! > key2! && this.sortDir![sortColumnId]) || (key1! < key2! && this.sortDir![sortColumnId])) {
-    //       return 1;
-    //     }
-  
-    //     if ((key1! < key2! && this.sortDir![sortColumnId]) || (key1! > key2! && this.sortDir![sortColumnId])) {
-    //       return -1;
-    //     }
-    //   }
-
-    //   return 0;
-    // });
-  }
-
-  applySort1() {
-    this.sortDir1 = !this.sortDir1;
-    if (this.sortDir1) {
-      this.buses = this.buses!.sort((bus1, bus2) => {
-        if (bus1.busModel!.toLowerCase() > bus2.busModel!.toLowerCase()) {
-          return 1;
-        }
-
-        if (bus1.busModel!.toLowerCase() < bus2.busModel!.toLowerCase()) {
-          return -1;
-        }
-
-        return 0;
-      });
-    } else {
-      this.buses = this.buses!.sort((bus1, bus2) => {
-        if (bus1.busModel!.toLowerCase() < bus2.busModel!.toLowerCase()) {
-          return 1;
-        }
-
-        if (bus1.busModel!.toLowerCase() > bus2.busModel!.toLowerCase()) {
-          return -1;
-        }
-
-        return 0;
-      });
-    }
-  }
-
-  applySort2() {
-    this.sortDir2 = !this.sortDir2;
-    this.buses = this.buses!.sort((bus1, bus2) => {
-      if ((bus1.number!.toLowerCase() > bus2.number!.toLowerCase() && this.sortDir2) || (bus1.number!.toLowerCase() < bus2.number!.toLowerCase() && !this.sortDir2)) {
-        return 1;
-      }
-
-      if ((bus1.number!.toLowerCase() < bus2.number!.toLowerCase() && this.sortDir2) || (bus1.number!.toLowerCase() > bus2.number!.toLowerCase() && !this.sortDir2)) {
-        return -1;
-      }
-
-      return 0;
-    });
-  }
-
-  // applySort2() {
-  //   this.sortDir2 = !this.sortDir2;
-  //   if (this.sortDir2) {
-  //     this.buses = this.buses!.sort((bus1, bus2) => {
-  //       if ((bus1.number!.toLowerCase() > bus2.number!.toLowerCase() && this.sortDir2) || (bus1.number!.toLowerCase() < bus2.number!.toLowerCase() && !this.sortDir2)) {
-  //         return 1;
-  //       }
-
-  //       if (bus1.number!.toLowerCase() < bus2.number!.toLowerCase()) {
-  //         return -1;
-  //       }
-
-  //       return 0;
-  //     });
-  //   } else {
-  //     this.buses = this.buses!.sort((bus1, bus2) => {
-  //       if (bus1.number!.toLowerCase() < bus2.number!.toLowerCase()) {
-  //         return 1;
-  //       }
-
-  //       if (bus1.number!.toLowerCase() > bus2.number!.toLowerCase()) {
-  //         return -1;
-  //       }
-
-  //       return 0;
-  //     });
-  //   }
-  // }
-
-  applySort3() {
-    this.sortDir3 = !this.sortDir3;
-    if (this.sortDir3) {
-      this.buses = this.buses!.sort((bus1, bus2) => {
-        if (bus1.seatsQty! > bus2.seatsQty!) {
-          return 1;
-        }
-
-        if (bus1.seatsQty! < bus2.seatsQty!) {
-          return -1;
-        }
-
-        return 0;
-      });
-    } else {
-      this.buses = this.buses!.sort((bus1, bus2) => {
-        if (bus1.seatsQty! < bus2.seatsQty!) {
-          return 1;
-        }
-
-        if (bus1.seatsQty! > bus2.seatsQty!) {
-          return -1;
-        }
-
-        return 0;
-      });
-    }
-  }
-
-  applySort4() {
-    this.sortDir4 = !this.sortDir4;
-    if (this.sortDir4) {
-      this.buses = this.buses!.sort((bus1, bus2) => {
-        if (bus1.vin!.toLowerCase() > bus2.vin!.toLowerCase()) {
-          return 1;
-        }
-
-        if (bus1.vin!.toLowerCase() < bus2.vin!.toLowerCase()) {
-          return -1;
-        }
-
-        return 0;
-      });
-    } else {
-      this.buses = this.buses!.sort((bus1, bus2) => {
-        if (bus1.vin!.toLowerCase() < bus2.vin!.toLowerCase()) {
-          return 1;
-        }
-
-        if (bus1.vin!.toLowerCase() > bus2.vin!.toLowerCase()) {
-          return -1;
         }
 
         return 0;
