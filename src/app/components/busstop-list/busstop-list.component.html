@@ -1,0 +1,43 @@
+<div class = "row h2 my-4 text-center">
+    <p>Список остановочных пунктов</p>
+</div>
+<div class="row">
+    <div class="col text-start">
+        <button (click)="navigateAdd()" class="btn btn-primary mb-1">Добавить</button>
+    </div>
+    <div class="col-3 text-end">
+        <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
+    </div>
+</div>
+<table class = "table table-striped table-bordered table-hover align-middle text-center mb-1">
+    <thead>
+        <tr>
+            <th><a id="stopName" (click)="applySortTest($event)">Название</a></th>
+            <th><a id="intermediate" (click)="applySortTest($event)">Промежуточная?</a></th>
+            <th><a id="latitude" (click)="applySortTest($event)">Широта</a></th>
+            <th><a id="longitude" (click)="applySortTest($event)">Долгота</a></th>
+            <th><a id="cityByCityId.cityName" (click)="applySortTest($event)">Город</a></th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let busstop of busstops" >
+            <td> {{ busstop.stopName }} </td>
+            <td> {{ busstop.intermediate }} </td>
+            <td> {{ busstop.latitude }} </td>
+            <td> {{ busstop.longitude }} </td>
+            <td> {{ busstop.cityByCityId.cityName }} </td>
+            <td>
+                <button (click) = "navigateUpdate(busstop.stopId)" class = "btn btn-primary">Изменить</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col">
+        
+    </div>
+    <div class="col-3 text-end">
+        <button (click) = "saveTable()" class = "btn btn-primary">Экспорт</button>
+    </div>
+</div>

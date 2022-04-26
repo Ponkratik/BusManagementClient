@@ -18,6 +18,9 @@ import { BuspageAddComponent } from './components/buspage-add/buspage-add.compon
 import { CityAddComponent } from './components/city-add/city-add.component';
 import { CityUpdateComponent } from './components/city-update/city-update.component';
 import { CityListComponent } from './components/city-list/city-list.component';
+import { BusstopListComponent } from './components/busstop-list/busstop-list.component';
+import { BusstopAddComponent } from './components/busstop-add/busstop-add.component';
+import { BusstopUpdateComponent } from './components/busstop-update/busstop-update.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { CityListComponent } from './components/city-list/city-list.component';
     BuspageAddComponent,
     CityAddComponent,
     CityUpdateComponent,
-    CityListComponent
+    CityListComponent,
+    BusstopListComponent,
+    BusstopAddComponent,
+    BusstopUpdateComponent
   ],
   imports: [
     FormsModule,

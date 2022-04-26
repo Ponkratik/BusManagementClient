@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4">
+        <div class="row">
+            <h3 class="text-center">Добавить остановочный пункт</h3>
+            <hr />
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit($event)" #f="ngForm" novalidate>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="stopName">Название</label>
+                    <input type="text" class="form-control" name="stopName" [(ngModel)]="form.stopName" required
+                        minlength="1" maxlength="255" #stopName="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="stopName.errors && f.submitted">
+                        <div *ngIf="stopName.errors['required']">Название необходимо</div>
+                        <div *ngIf="stopName.errors['minlength']">
+                            Название должно быть длиной более 1 символа
+                        </div>
+                        <div *ngIf="stopName.errors['maxlength']">
+                            Название должно быть длиной менее 255 символов
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-start my-3 mt-4">
+                    <input class="form-check-input" type="checkbox" value="" id="intermediate">
+                    <label class="ms-1" for="intermediate">Промежуточный</label>
+                </div>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="latitude">Широта</label>
+                    <input type="text" class="form-control" name="latitude" [(ngModel)]="form.latitude" required
+                        minlength="3" maxlength="255" #latitude="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="latitude.errors && f.submitted">
+                        <div *ngIf="latitude.errors['required']">Широта необходима</div>
+                    </div>
+                </div>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="longitude">Долгота</label>
+                    <input type="text" class="form-control" name="longitude" [(ngModel)]="form.longitude" required
+                        minlength="3" maxlength="255" #longitude="ngModel" />
+                    <div class="alert-danger text-center" *ngIf="longitude.errors && f.submitted">
+                        <div *ngIf="longitude.errors['required']">Долота необходима</div>
+                    </div>
+                </div>
+                <div class="form-group text-start">
+                    <label class="ms-1 my-1" for="cityByCityId">Город</label>
+                    <input class="form-control" list="cityDataList" id="cityByCityId"
+                        placeholder="Введите для поиска..."  name="cityStr">
+                    <datalist id="cityDataList">
+                        <option *ngFor = "let city of cities" [value]="city.cityName">{{ city.cityName }}</option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block mt-4 text-center">Добавить</button>
+                </div>
+                <div class="alert alert-warning my-2" *ngIf="f.submitted && !isSuccessful">
+                    Ошибка:<br />{{ errorMessage }}
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <p class="text-center fw-light my-2 text-decoration-underline">
+            <a (click)="navigateToList()">Вернуться</a>
+        </p>
+    </div>
+</div>
