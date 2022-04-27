@@ -40,8 +40,6 @@ export class BusstopUpdateComponent implements OnInit {
       next: data => {
         this.form = data;
         this.cityStr = this.form.cityByCityId.cityName;
-
-        console.log(data);
       }
     });
   }
