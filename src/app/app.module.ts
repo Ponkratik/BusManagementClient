@@ -21,6 +21,9 @@ import { CityListComponent } from './components/city-list/city-list.component';
 import { BusstopListComponent } from './components/busstop-list/busstop-list.component';
 import { BusstopAddComponent } from './components/busstop-add/busstop-add.component';
 import { BusstopUpdateComponent } from './components/busstop-update/busstop-update.component';
+import { RouteUpdateComponent } from './components/route-update/route-update.component';
+import { RouteListComponent } from './components/route-list/route-list.component';
+import { RouteAddComponent } from './components/route-add/route-add.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { BusstopUpdateComponent } from './components/busstop-update/busstop-upda
     CityListComponent,
     BusstopListComponent,
     BusstopAddComponent,
-    BusstopUpdateComponent
+    BusstopUpdateComponent,
+    RouteUpdateComponent,
+    RouteListComponent,
+    RouteAddComponent
   ],
   imports: [
     FormsModule,

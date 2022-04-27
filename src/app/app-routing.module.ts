@@ -15,6 +15,9 @@ import { CityAddComponent } from './components/city-add/city-add.component';
 import { BusstopListComponent } from './components/busstop-list/busstop-list.component';
 import { BusstopUpdateComponent } from './components/busstop-update/busstop-update.component';
 import { BusstopAddComponent } from './components/busstop-add/busstop-add.component';
+import { RouteListComponent } from './components/route-list/route-list.component';
+import { RouteUpdateComponent } from './components/route-update/route-update.component';
+import { RouteAddComponent } from './components/route-add/route-add.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,6 +34,9 @@ const routes: Routes = [
   { path: 'busstopmanagement', component: BusstopListComponent },
   { path: 'busstopmanagement/update/:id', component: BusstopUpdateComponent },
   { path: 'busstopmanagement/add', component: BusstopAddComponent },
+  { path: 'routemanagement', component: RouteListComponent },
+  { path: 'routemanagement/update/:id', component: RouteUpdateComponent },
+  { path: 'routemanagement/add', component: RouteAddComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
