@@ -17,6 +17,7 @@ export class RouteUpdateComponent implements OnInit {
 
   id!: number;
 
+  displayStopEditForm = false;
   restBusstops: Busstop[] = [];
   selectedBusstops: Busstop[] = [];
   selectedDeltas: Time[] = [];
@@ -35,9 +36,6 @@ export class RouteUpdateComponent implements OnInit {
       }
     });
 
-    var rest: Busstop[] = [];
-    var selected: Busstop[] = [];
-
     this.busstopService.getAll().subscribe({
       next: data => {
         this.restBusstops = data;
@@ -48,35 +46,38 @@ export class RouteUpdateComponent implements OnInit {
       next: data => {
         let routebusstops = data;
         routebusstops.forEach(element => {
-          selected.push(element.busstopByStopId);
           this.selectedBusstops.push(element.busstopByStopId);
           this.selectedDeltas.push(element.timeDelta);
         });
       }
     });
-
-    this.restBusstops = this.restBusstops.filter((stop: Busstop) => {
-      console.log('here');
-      for (let i = 0; i < this.selectedBusstops.length; i++) {
-        if (stop.stopId === this.selectedBusstops[i].stopId) {
-          console.log('equals');
-          return false;
-        }
-      }
-
-      return true;
-    });
-
-    console.log(selected);
   }
 
   onSubmit() {
     this.save();
   }
 
+  displayFilteredRestStops() {
+    if (this.displayStopEditForm === true) {
+      return;
+    }
+    this.restBusstops = this.restBusstops.filter((stop1: Busstop) => {
+      let result = true;
+      this.selectedBusstops.forEach((stop2: Busstop) => {
+        if (stop1.stopId === stop2.stopId) {
+          result = false;
+          return;
+        }
+      });
+
+      return result;
+    });
+
+    this.displayStopEditForm = true;
+  }
+
   moveToSelected(index: number) {
     this.selectedBusstops.push(this.restBusstops[index]);
-    this.selectedDeltas.push();
     this.restBusstops.splice(index, 1);
   }
 
@@ -99,7 +100,7 @@ export class RouteUpdateComponent implements OnInit {
     });
 
     let arr: any = [];
-    for(let i = 0; i < this.selectedBusstops.length; i++) {
+    for (let i = 0; i < this.selectedBusstops.length; i++) {
       let form: any = {
         order: 0,
         busstopByStopId: null,
