@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from '../../_services/auth.service';
 
@@ -8,28 +9,13 @@ import { AuthService } from '../../_services/auth.service';
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent implements OnInit {
-
-  /*form1: User = {
-    login: '',
-    password: '',
-    email: '',
-    lastName: '',
-    firstName: '',
-    surName: '',
-    phone: '',
-    roleByRoleId: {
-      roleId: 0,
-      roleName: ''
-    }
-  };*/
-
   form: User = new User();
 
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -49,5 +35,10 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = err.error.error;
       }
     });
+  }
+
+  
+  navigateToList() {
+    this.router.navigate(['usermanagement']);
   }
 }

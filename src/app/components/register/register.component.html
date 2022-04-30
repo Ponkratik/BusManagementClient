@@ -1,46 +1,27 @@
-<div class="col-md-12">
-    <div class="card card-container">
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form-group">
-          <label for="login">Логин</label>
-          <input
-            type="text"
-            class="form-control"
-            name="login"
-            [(ngModel)]="form.login"
-            required
-            minlength="3"
-            maxlength="40"
-            #login="ngModel"
-          />
-          <div class="alert-danger" *ngIf="login.errors && f.submitted">
-            <div *ngIf="login.errors['required']">Логин необходим</div>
-            <div *ngIf="login.errors['minlength']">
-              Логин должен быть длиной более 3 символов
-            </div>
-            <div *ngIf="login.errors['maxlength']">
-              Логин должен быть длиной менее 40 символов
+<div class="row">
+    <div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4">
+      <div class="row">
+        <h3 class="text-center">Зарегистрировать пользователя</h3>
+        <hr />
+        <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="login">Логин</label>
+            <input type="text" class="form-control" name="login" [(ngModel)]="form.login" required minlength="3"
+              maxlength="40" #login="ngModel" />
+            <div class="alert-danger" *ngIf="login.errors && f.submitted">
+              <div *ngIf="login.errors['required']">Логин необходим</div>
+              <div *ngIf="login.errors['minlength']">
+                Логин должен быть длиной более 3 символов
+              </div>
+              <div *ngIf="login.errors['maxlength']">
+                Логин должен быть длиной менее 40 символов
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-            <label for="password">Пароль</label>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              [(ngModel)]="form.password"
-              required
-              minlength="6"
-              maxlength="255"
-              #password="ngModel"
-            />
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="password">Пароль</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+              maxlength="255" #password="ngModel" />
             <div class="alert-danger" *ngIf="password.errors && f.submitted">
               <div *ngIf="password.errors['required']">Пароль необходим</div>
               <div *ngIf="password.errors['minlength']">
@@ -51,98 +32,67 @@
               </div>
             </div>
           </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            [(ngModel)]="form.email"
-            required
-            email
-            #email="ngModel"
-          />
-          <div class="alert-danger" *ngIf="email.errors && f.submitted">
-            <div *ngIf="email.errors['required']">Email необходим</div>
-            <div *ngIf="email.errors['email']">
-              Email должен быть корректным
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="email">Email</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
+              #email="ngModel" />
+            <div class="alert-danger" *ngIf="email.errors && f.submitted">
+              <div *ngIf="email.errors['required']">Email необходим</div>
+              <div *ngIf="email.errors['email']">
+                Email должен быть корректным
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Фамилия</label>
-            <input
-              type="text"
-              class="form-control"
-              name="lastName"
-              [(ngModel)]="form.lastName"
-              required
-              #lastName="ngModel"
-            />
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="lastName">Фамилия</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required
+              #lastName="ngModel" />
             <div class="alert-danger" *ngIf="lastName.errors && f.submitted">
               <div *ngIf="lastName.errors['required']">Фамилия необходима</div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="firstName">Имя</label>
-            <input
-              type="text"
-              class="form-control"
-              name="firstName"
-              [(ngModel)]="form.firstName"
-              required
-              #firstName="ngModel"
-            />
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="firstName">Имя</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" required
+              #firstName="ngModel" />
             <div class="alert-danger" *ngIf="firstName.errors && f.submitted">
               <div *ngIf="firstName.errors['required']">Имя необходимо</div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="surName">Отчество</label>
-            <input
-              type="text"
-              class="form-control"
-              name="surName"
-              [(ngModel)]="form.surName"
-              #surName="ngModel"
-            />
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="surName">Отчество</label>
+            <input type="text" class="form-control" name="surName" [(ngModel)]="form.surName" #surName="ngModel" />
           </div>
-          <div class="form-group">
+          <div class="form-group text-start">
             <label for="phone">Телефон</label>
-            <input
-              type="tel"
-              class="form-control"
-              name="phone"
-              [(ngModel)]="form.phone"
-              required
-              #email="ngModel"
-            />
+            <input type="tel" class="form-control" name="phone" [(ngModel)]="form.phone" required #email="ngModel" />
             <div class="alert-danger" *ngIf="email.errors && f.submitted">
               <div *ngIf="email.errors['required']">Телефон необходим</div>
             </div>
-          </div><div class="form-group">
-            <label for="role">Роль</label>
-            <input
-              type="text"
-              class="form-control"
-              name="role"
-              [(ngModel)]="form.roleByRoleId.roleName"
-              required
-              #role="ngModel"
-            />
+          </div>
+          <div class="form-group text-start">
+            <label class="ms-1 my-1" for="role">Роль</label>
+            <input type="text" class="form-control" name="role" [(ngModel)]="form.roleByRoleId.roleName" required
+              #role="ngModel" />
             <div class="alert-danger" *ngIf="role.errors && f.submitted">
               <div *ngIf="role.errors['required']">Роль необходима</div>
             </div>
           </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block">Зарегистрировать</button>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block mt-4 text-center">Зарегистрировать</button>
+          </div>
+          <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+            Регистрация не удалась:<br />{{ errorMessage }}
+          </div>
+        </form>
+        <div class="alert alert-success" *ngIf="isSuccessful">
+          Регистрация прошла успешно!
         </div>
-        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-          Регистрация не удалась:<br />{{ errorMessage }}
-        </div>
-      </form>
-      <div class="alert alert-success" *ngIf="isSuccessful">
-        Регистрация прошла успешно!
       </div>
     </div>
+    <div>
+      <p class="text-center fw-light my-2 text-decoration-underline">
+          <a (click)="navigateToList()">Вернуться</a>
+      </p>
   </div>
+</div>
