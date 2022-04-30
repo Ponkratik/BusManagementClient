@@ -18,6 +18,9 @@ import { BusstopAddComponent } from './components/busstop-add/busstop-add.compon
 import { RouteListComponent } from './components/route-list/route-list.component';
 import { RouteUpdateComponent } from './components/route-update/route-update.component';
 import { RouteAddComponent } from './components/route-add/route-add.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { TripUpdateComponent } from './components/trip-update/trip-update.component';
+import { TripAddComponent } from './components/trip-add/trip-add.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,6 +40,9 @@ const routes: Routes = [
   { path: 'routemanagement', component: RouteListComponent },
   { path: 'routemanagement/update/:id', component: RouteUpdateComponent },
   { path: 'routemanagement/add', component: RouteAddComponent },
+  { path: 'tripmanagement', component: TripListComponent },
+  { path: 'tripmanagement/update/:id', component: TripUpdateComponent },
+  { path: 'tripmanagement/add', component: TripAddComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

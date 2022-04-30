@@ -24,6 +24,9 @@ import { BusstopUpdateComponent } from './components/busstop-update/busstop-upda
 import { RouteUpdateComponent } from './components/route-update/route-update.component';
 import { RouteListComponent } from './components/route-list/route-list.component';
 import { RouteAddComponent } from './components/route-add/route-add.component';
+import { TripUpdateComponent } from './components/trip-update/trip-update.component';
+import { TripAddComponent } from './components/trip-add/trip-add.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { RouteAddComponent } from './components/route-add/route-add.component';
     BusstopUpdateComponent,
     RouteUpdateComponent,
     RouteListComponent,
-    RouteAddComponent
+    RouteAddComponent,
+    TripUpdateComponent,
+    TripAddComponent,
+    TripListComponent
   ],
   imports: [
     FormsModule,
