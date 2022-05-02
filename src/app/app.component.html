@@ -54,6 +54,7 @@
           Аккаунт
         </a>
         <ul class="dropdown-menu" aria-labelledby="profileDropdownMenuLink">
+          <li><a href="/mytrips" class="dropdown-item" routerLink="mytrips">Мои поездки</a></li>
           <li><a href="/profile" class="dropdown-item" routerLink="profile">{{ storedUser.login }}</a></li>
           <li><a href class="dropdown-item" (click)="logout()">Выход</a></li>
         </ul>

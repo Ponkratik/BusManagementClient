@@ -28,6 +28,7 @@ import { TripUpdateComponent } from './components/trip-update/trip-update.compon
 import { TripAddComponent } from './components/trip-add/trip-add.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NoAccessComponent } from './components/no-access/no-access.component';
     TripUpdateComponent,
     TripAddComponent,
     TripListComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    MyTripsComponent
   ],
   imports: [
     FormsModule,
