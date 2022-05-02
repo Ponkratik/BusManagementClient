@@ -5,6 +5,7 @@ import { Routebusstop } from 'src/app/models/routebusstop.model';
 import { CsvexportService } from 'src/app/_services/csvexport.service';
 import { RouteService } from 'src/app/_services/route.service';
 import { RoutebusstopService } from 'src/app/_services/routebusstop.service';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-route-list',
@@ -50,6 +51,8 @@ export class RouteListComponent implements OnInit {
 
   selectRouteRow(routeId: number) {
     this.getAllBusstopsByRouteId(routeId);
+    this.routeBusstopService.allStops = this.allStops!;
+    //this.map.setWaypoint(this.allStops!);
   }
 
   saveTable() {

@@ -61,5 +61,11 @@
                 </tr>
             </tbody>
         </table>
+        <button (click) = "child.setWaypoint(this.allStops!)" class = "btn btn-primary">На карту</button>
+    </div>
+    <div class="row">
+        <div class="my-5 w-50 h-25 mx-auto">
+            <app-map #child></app-map>
+        </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { Busstop } from '../models/busstop.model';
 import { Routebusstop } from '../models/routebusstop.model';
@@ -14,6 +15,8 @@ const httpOptions = {
 })
 export class RoutebusstopService {
 
+  allStops: Routebusstop[] = [];
+
   constructor(private http: HttpClient) { }
 
   getAllById(id: number): Observable<Routebusstop[]> {
@@ -26,5 +29,9 @@ export class RoutebusstopService {
 
   updateById(id: number, routebusstops: any) {
     return this.http.put(API + 'update/' + id, routebusstops, httpOptions);
+  }
+
+  getRouteBusstopsByRouteId(): Observable<Routebusstop[]> {
+    return of(this.allStops);
   }
 }

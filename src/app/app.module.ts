@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { RouteAddComponent } from './components/route-add/route-add.component';
 import { TripUpdateComponent } from './components/trip-update/trip-update.component';
 import { TripAddComponent } from './components/trip-add/trip-add.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -51,13 +53,15 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
     RouteAddComponent,
     TripUpdateComponent,
     TripAddComponent,
-    TripListComponent
+    TripListComponent,
+    MapComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    LeafletModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
