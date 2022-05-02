@@ -61,7 +61,7 @@
                         <td> {{ stop.order }} </td>
                         <td> {{ stop.busstopByStopId.stopName }} </td>
                         <td> {{ stop.busstopByStopId.cityByCityId.cityName }} </td>
-                        <td> {{ stop.timeDelta }} </td>
+                        <td> {{ stop.timeDelta | date: '' }} </td>
                     </tr>
                 </tbody>
             </table>
