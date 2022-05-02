@@ -25,7 +25,7 @@ export class TripListComponent implements OnInit {
     && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
     || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
 
-    this.getAll()
+    this.getAll();
   }
 
   private getAll() {
