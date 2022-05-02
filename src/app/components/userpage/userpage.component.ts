@@ -45,6 +45,10 @@ export class UserpageComponent implements OnInit {
     )
   }
 
+  saveTable() {
+    this.csvExportService.downloadFile(this.users!, 'usersList', Object.getOwnPropertyNames(this.users![0]));
+  }
+
   applyFilter(event: any) {
     let filterValueLower = event.target.value.toLowerCase();
     if (event.target.value === '') {

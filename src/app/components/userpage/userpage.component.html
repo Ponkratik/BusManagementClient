@@ -9,7 +9,7 @@
         <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
     </div>
 </div>
-<table class = "table table-striped table-bordered">
+<table class = "table table-striped table-bordered table-hover align-middle text-center mb-1">
     <thead>
         <tr>
             <th><a id="lastName" (click)="applySortTest($event)">Фамилия</a></th>
@@ -27,8 +27,16 @@
             <td> {{ user.blocked }} </td>
             <td>
                 <button (click) = "updateUser(user.userId)" class = "btn btn-primary">Изменить</button>
-                <button (click) = "deleteUser(user.userId)" class = "btn btn-danger" style="margin-left: 10px">Удалить</button>
+                <button (click) = "deleteUser(user.userId)" class = "btn btn-danger" style="margin-left: 10px">Заблокировать</button>
             </td>
         </tr>
     </tbody>
 </table>
+<div class="row">
+    <div class="col">
+        
+    </div>
+    <div class="col-3 text-end">
+        <button (click) = "saveTable()" class = "btn btn-primary">Экспорт</button>
+    </div>
+</div>
