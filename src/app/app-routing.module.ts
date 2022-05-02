@@ -21,11 +21,13 @@ import { RouteAddComponent } from './components/route-add/route-add.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { TripUpdateComponent } from './components/trip-update/trip-update.component';
 import { TripAddComponent } from './components/trip-add/trip-add.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'signin', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'usermanagement', component: UserpageComponent },
   { path: 'usermanagement/update/:id', component: UserpageUpdateComponent},
   { path: 'busmanagement', component: BuspageComponent },
