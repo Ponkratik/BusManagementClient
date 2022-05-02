@@ -24,7 +24,7 @@
         <tr *ngFor = "let trip of trips" >
             <td> {{ trip.routeByRouteId.routeId }} </td>
             <td> {{ trip.routeByRouteId.routeName }} </td>
-            <td> {{ trip.depTime }} </td>
+            <td> {{ trip.depTime | date:'dd.MM.yyyy HH:mm:ss':'UTC +3'}} </td>
             <td> {{ trip.userByUserId.lastName + ' ' + trip.userByUserId.firstName + ' ' + trip.userByUserId.surName }} </td>
             <td> {{ trip.busByBusId.busModel + ' ' + trip.busByBusId.number }} </td>
             <td>
