@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { RoleService } from 'src/app/_services/role.service';
 import { AuthService } from '../../_services/auth.service';
 import { TokenStorageService } from '../../_services/token-storage.service';
 
@@ -13,16 +14,18 @@ export class LoginComponent implements OnInit {
 
   form: User = new User();
 
+  roleLocal = '';
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+  constructor(private roleService: RoleService, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.form.roleByRoleId = this.tokenStorage.getUser().roleByRoleId[0];
+      this.roleLocal = this.roleService.getLocalRoleName(this.form.roleByRoleId.roleName!);
     }
   }
 
@@ -34,7 +37,6 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        console.log(data);
         this.form.roleByRoleId = this.tokenStorage.getUser().roleByRoleId[0];
         this.redirectToHomePage();
         this.reloadPage();

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { City } from 'src/app/models/city.model';
 import { CityService } from 'src/app/_services/city.service';
 import { CsvexportService } from 'src/app/_services/csvexport.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-city-list',
@@ -15,9 +16,15 @@ export class CityListComponent implements OnInit {
   
   sortDir?: boolean[] = [true, true];
 
-  constructor(private cityService: CityService, private csvExportService: CsvexportService, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private cityService: CityService, private csvExportService: CsvexportService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
     this.getAll()
   }
 

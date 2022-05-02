@@ -6,32 +6,32 @@
         <a href="/home" class="nav-link" routerLink="home">Главная</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && isSysadmin">
       <li class="nav-item">
         <a href="/usermanagement" class="nav-link" routerLink="usermanagement">Пользователи</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isGaragemanager)">
       <li class="nav-item">
         <a href="/busmanagement" class="nav-link" routerLink="busmanagement">Автобусы</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
       <li class="nav-item">
         <a href="/citymanagement" class="nav-link" routerLink="citymanagement">Города</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
       <li class="nav-item">
         <a href="/busstopmanagement" class="nav-link" routerLink="busstopmanagement">Остановки</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
       <li class="nav-item">
         <a href="/routemanagement" class="nav-link" routerLink="routemanagement">Маршруты</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
       <li class="nav-item">
         <a href="/tripmanagement" class="nav-link" routerLink="tripmanagement">Рейсы</a>
       </li>

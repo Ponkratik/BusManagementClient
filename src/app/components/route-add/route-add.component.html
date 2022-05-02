@@ -1,91 +1,96 @@
-<div class="row">
-    <div class="card col-md-12 text-center p-4 mt-4">
-        <div class="row">
-            <h3 class="text-center">Добавить маршрут</h3>
-            <hr />
-            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="routeId">Номер маршрута</label>
-                    <input type="number" class="form-control" name="routeId" [(ngModel)]="route.routeId" required min="1"
-                        #routeId="ngModel" />
-                    <div class="alert-danger text-center" *ngIf="routeId.errors && f.submitted">
-                        <div *ngIf="routeId.errors['required']">Количество мест необходимо</div>
-                        <div *ngIf="routeId.errors['min']">Количество мест должно быть положительным</div>
-                    </div>
-                </div>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="routeName">Название</label>
-                    <input type="text" class="form-control" name="routeName" [(ngModel)]="route.routeName" required minlength="1"
-                        maxlength="60" #routeName="ngModel" />
-                    <div class="alert-danger text-center" *ngIf="routeName.errors && f.submitted">
-                        <div *ngIf="routeName.errors['required']">Название необходимо</div>
-                        <div *ngIf="routeName.errors['minlength']">
-                            Название должно быть длиной более 1 символа
-                        </div>
-                        <div *ngIf="routeName.errors['maxlength']">
-                            Название должно быть длиной менее 60 символов
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block mt-4 text-center">Добавить</button>
-                </div>
-                <div class="alert alert-warning my-2" *ngIf="f.submitted && !isSuccessful">
-                    Ошибка:<br />{{ errorMessage }}
-                </div>
-            </form>
-        </div>
-    </div>
+<div *ngIf="!isLoggedIn">
+    <app-no-access></app-no-access>
+</div>
+<div *ngIf="isLoggedIn">
     <div class="row">
-        <div class="col-5">
-            <table class = "table table-striped table-bordered table-hover align-middle text-center my-1">
-                <thead>
-                    <tr>
-                        <th><a>Название</a></th>
-                        <th><a>Город</a></th>
-                        <th><a>Действие</a></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor = "let stop of restBusstops; let i = index">
-                        <td> {{ stop.stopName }} </td>
-                        <td> {{ stop.cityByCityId.cityName }} </td>
-                        <td><button (click) = "moveToSelected(i)" class = "btn btn-primary">></button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card col-md-12 text-center p-4 mt-4">
+            <div class="row">
+                <h3 class="text-center">Добавить маршрут</h3>
+                <hr />
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="routeId">Номер маршрута</label>
+                        <input type="number" class="form-control" name="routeId" [(ngModel)]="route.routeId" required min="1"
+                            #routeId="ngModel" />
+                        <div class="alert-danger text-center" *ngIf="routeId.errors && f.submitted">
+                            <div *ngIf="routeId.errors['required']">Количество мест необходимо</div>
+                            <div *ngIf="routeId.errors['min']">Количество мест должно быть положительным</div>
+                        </div>
+                    </div>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="routeName">Название</label>
+                        <input type="text" class="form-control" name="routeName" [(ngModel)]="route.routeName" required minlength="1"
+                            maxlength="60" #routeName="ngModel" />
+                        <div class="alert-danger text-center" *ngIf="routeName.errors && f.submitted">
+                            <div *ngIf="routeName.errors['required']">Название необходимо</div>
+                            <div *ngIf="routeName.errors['minlength']">
+                                Название должно быть длиной более 1 символа
+                            </div>
+                            <div *ngIf="routeName.errors['maxlength']">
+                                Название должно быть длиной менее 60 символов
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block mt-4 text-center">Добавить</button>
+                    </div>
+                    <div class="alert alert-warning my-2" *ngIf="f.submitted && !isSuccessful">
+                        Ошибка:<br />{{ errorMessage }}
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="col-2">
-            
+        <div class="row">
+            <div class="col-5">
+                <table class = "table table-striped table-bordered table-hover align-middle text-center my-1">
+                    <thead>
+                        <tr>
+                            <th><a>Название</a></th>
+                            <th><a>Город</a></th>
+                            <th><a>Действие</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let stop of restBusstops; let i = index">
+                            <td> {{ stop.stopName }} </td>
+                            <td> {{ stop.cityByCityId.cityName }} </td>
+                            <td><button (click) = "moveToSelected(i)" class = "btn btn-primary">></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2">
+                
+            </div>
+            <div class="col-5">
+                <table class = "table table-striped table-bordered table-hover align-middle text-center my-1">
+                    <thead>
+                        <tr>
+                            <th><a>Номер</a></th>
+                            <th><a>Дельта</a></th>
+                            <th><a>Название</a></th>
+                            <th><a>Город</a></th>
+                            <th><a>Действие</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let stop of selectedBusstops; let i = index">
+                            <td> {{ i + 1 }} </td>
+                            <td>
+                                <input type="time" class="form-control" name="delta" [(ngModel)]="selectedDeltas[i]"/>
+                            </td>
+                            <td> {{ stop.stopName }} </td>
+                            <td> {{ stop.cityByCityId.cityName }} </td>
+                            <td><button (click) = "moveToRest(i)" class = "btn btn-primary"><</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-5">
-            <table class = "table table-striped table-bordered table-hover align-middle text-center my-1">
-                <thead>
-                    <tr>
-                        <th><a>Номер</a></th>
-                        <th><a>Дельта</a></th>
-                        <th><a>Название</a></th>
-                        <th><a>Город</a></th>
-                        <th><a>Действие</a></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor = "let stop of selectedBusstops; let i = index">
-                        <td> {{ i + 1 }} </td>
-                        <td>
-                            <input type="time" class="form-control" name="delta" [(ngModel)]="selectedDeltas[i]"/>
-                        </td>
-                        <td> {{ stop.stopName }} </td>
-                        <td> {{ stop.cityByCityId.cityName }} </td>
-                        <td><button (click) = "moveToRest(i)" class = "btn btn-primary"><</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div>
+            <p class="text-center fw-light my-2 text-decoration-underline">
+                <a (click)="navigateToList()">Вернуться</a>
+            </p>
         </div>
-    </div>
-    <div>
-        <p class="text-center fw-light my-2 text-decoration-underline">
-            <a (click)="navigateToList()">Вернуться</a>
-        </p>
     </div>
 </div>

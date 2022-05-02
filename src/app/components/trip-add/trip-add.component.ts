@@ -6,6 +6,7 @@ import { Route } from 'src/app/models/route.model';
 import { User } from 'src/app/models/user.model';
 import { BusService } from 'src/app/_services/bus.service';
 import { RouteService } from 'src/app/_services/route.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { TripService } from 'src/app/_services/trip.service';
 import { UserService } from 'src/app/_services/user.service';
 
@@ -37,9 +38,15 @@ export class TripAddComponent implements OnInit {
   isSuccessful = false;
   errorMessage = '';
 
-  constructor(private tripService: TripService, private routeService: RouteService, private userService: UserService, private busService: BusService, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private tripService: TripService, private routeService: RouteService, private userService: UserService, private busService: BusService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
     this.routeService.getAll().subscribe({
       next: data => {
         this.routes = data;        

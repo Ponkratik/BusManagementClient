@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Route } from '@angular/router';
 import { Trip } from 'src/app/models/trip.model';
 import { CsvexportService } from 'src/app/_services/csvexport.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { TripService } from 'src/app/_services/trip.service';
 
 @Component({
@@ -15,9 +16,15 @@ export class TripListComponent implements OnInit {
   
   sortDir?: boolean[] = [true, true, true, true, true, true];
 
-  constructor(private tripService: TripService, private csvExportService: CsvexportService, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private tripService: TripService, private csvExportService: CsvexportService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
     this.getAll()
   }
 

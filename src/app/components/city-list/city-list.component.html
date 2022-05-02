@@ -1,35 +1,40 @@
-<div class = "row h2 my-4 text-center">
-    <p>Список городов</p>
-</div>
-<div class="row">
-    <div class="col text-start">
-        <button (click)="navigateAdd()" class="btn btn-primary mb-1">Добавить город</button>
+<div *ngIf="!isLoggedIn">
+    <app-no-access></app-no-access>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <div class = "row h2 my-4 text-center">
+        <p>Список городов</p>
     </div>
-    <div class="col-3 text-end">
-        <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
+    <div class="row">
+        <div class="col text-start">
+            <button (click)="navigateAdd()" class="btn btn-primary mb-1">Добавить город</button>
+        </div>
+        <div class="col-3 text-end">
+            <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
+        </div>
     </div>
-</div>
-<table class = "table table-striped table-bordered table-hover align-middle text-center mb-1">
-    <thead>
-        <tr>
-            <th><a id="cityName" (click)="applySortTest($event)">Город</a></th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let city of cities" >
-            <td> {{ city.cityName }} </td>
-            <td>
-                <button (click) = "navigateUpdate(city.cityId)" class = "btn btn-primary">Изменить</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<div class="row">
-    <div class="col">
-        
+    <table class = "table table-striped table-bordered table-hover align-middle text-center mb-1">
+        <thead>
+            <tr>
+                <th><a id="cityName" (click)="applySortTest($event)">Город</a></th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let city of cities" >
+                <td> {{ city.cityName }} </td>
+                <td>
+                    <button (click) = "navigateUpdate(city.cityId)" class = "btn btn-primary">Изменить</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col">
+            
+        </div>
+        <div class="col-3 text-end">
+            <button (click) = "saveTable()" class = "btn btn-primary">Экспорт</button>
+        </div>
     </div>
-    <div class="col-3 text-end">
-        <button (click) = "saveTable()" class = "btn btn-primary">Экспорт</button>
-    </div>
-</div>
+  </div>

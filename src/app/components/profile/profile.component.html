@@ -1,4 +1,7 @@
-<div class="container">
+<div *ngIf="!isLoggedIn">
+    <app-no-access></app-no-access>
+</div>
+<div class="container" *ngIf="isLoggedIn">
     <div class="main-body">
         <div class="row h2 my-4 text-center">
             <p>Профиль</p>
@@ -64,3 +67,4 @@
             </div>
         </div>
     </div>
+</div>

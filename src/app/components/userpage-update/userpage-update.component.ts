@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -16,9 +17,14 @@ export class UserpageUpdateComponent implements OnInit {
   isSuccessful = false;
   errorMessage = '';
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
     this.id = this.route.snapshot.params['id'];
 
     this.userService.getById(this.id).subscribe(

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Busstop } from 'src/app/models/busstop.model';
 import { User } from 'src/app/models/user.model';
 import { CsvexportService } from 'src/app/_services/csvexport.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -16,9 +17,13 @@ export class UserpageComponent implements OnInit {
 
   sortDir?: boolean[] = [true, true, true, true, true, true, true, true, true, true];
 
-  constructor(private userService: UserService, private csvExportService: CsvexportService, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private userService: UserService, private csvExportService: CsvexportService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
     this.getAllUsers();
   }
 

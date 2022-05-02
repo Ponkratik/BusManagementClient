@@ -18,10 +18,10 @@ export class AppComponent {
 
   storedUser: User = new User();
 
-  showTransportManagementPage = false;
-  showRouteManagementPage = false;
-  showUserManagementPage = false;
-  showDriverPage = false;
+  isSysadmin = false;
+  isDispatcher = false;
+  isGaragemanager = false;
+  isDriver = false;
 
 
   constructor(private tokenStorageService: TokenStorageService) {}
@@ -38,10 +38,10 @@ export class AppComponent {
       this.storedUser.surName = user.surName;
       this.storedUser.phone = user.phone;
 
-      this.showDriverPage = this.storedUser.roleByRoleId.roleName == ('ROLE_DRIVER');
-      this.showRouteManagementPage = this.storedUser.roleByRoleId.roleName == ('ROLE_DISPATCHER');
-      this.showUserManagementPage = this.storedUser.roleByRoleId.roleName == ('ROLE_SYSADMIN');
-      this.showTransportManagementPage = this.storedUser.roleByRoleId.roleName == ('ROLE_GARAGEMANAGER');
+      this.isDriver = this.storedUser.roleByRoleId.roleName == ('ROLE_DRIVER');
+      this.isDispatcher = this.storedUser.roleByRoleId.roleName == ('ROLE_DISPATCHER');
+      this.isSysadmin = this.storedUser.roleByRoleId.roleName == ('ROLE_SYSADMIN');
+      this.isGaragemanager = this.storedUser.roleByRoleId.roleName == ('ROLE_GARAGEMANAGER');
     }
   }
 

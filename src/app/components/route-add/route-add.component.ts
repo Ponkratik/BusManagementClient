@@ -6,6 +6,7 @@ import { Route } from 'src/app/models/route.model';
 import { BusstopService } from 'src/app/_services/busstop.service';
 import { RouteService } from 'src/app/_services/route.service';
 import { RoutebusstopService } from 'src/app/_services/routebusstop.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-route-add',
@@ -22,9 +23,16 @@ export class RouteAddComponent implements OnInit {
   isSuccessful = false;
   errorMessage = '';
 
-  constructor(private routeService: RouteService, private routeBusstopService: RoutebusstopService, private busstopService: BusstopService, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private routeService: RouteService, private routeBusstopService: RoutebusstopService, private busstopService: BusstopService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+    
+    
     this.busstopService.getAll().subscribe({
       next: data => {
         this.restBusstops = data;

@@ -1,41 +1,46 @@
-<div class = "row h2 my-4 text-center">
-    <p>Список автобусов</p>
-</div>
-<div class="row">
-    <div class="col text-start">
-        <button (click)="navigateAdd()" class="btn btn-primary mb-1">Добавить автобус</button>
+<div *ngIf="!isLoggedIn">
+    <app-no-access></app-no-access>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <div class = "row h2 my-4 text-center">
+        <p>Список автобусов</p>
     </div>
-    <div class="col-3 text-end">
-        <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
+    <div class="row">
+        <div class="col text-start">
+            <button (click)="navigateAdd()" class="btn btn-primary mb-1">Добавить автобус</button>
+        </div>
+        <div class="col-3 text-end">
+            <input type="text" class="form-control" placeholder="Поиск" (keyup)="applyFilter($event)">
+        </div>
     </div>
-</div>
-<table class = "table table-striped table-bordered table-hover align-middle text-center mb-1">
-    <thead>
-        <tr>
-            <th><a id="busModel" (click)="applySortTest($event)">Модель</a></th>
-            <th><a id="number" (click)="applySortTest($event)">Гос.номер</a></th>
-            <th><a id="seatsQty" (click)="applySortTest($event)">Мест</a></th>
-            <th><a id="vin" (click)="applySortTest($event)">VIN</a></th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let bus of buses" >
-            <td> {{ bus.busModel }} </td>
-            <td> {{ bus.number }} </td>
-            <td> {{ bus.seatsQty }} </td>
-            <td> {{ bus.vin }} </td>
-            <td>
-                <button (click) = "navigateUpdate(bus.busId)" class = "btn btn-primary">Изменить</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<div class="row">
-    <div class="col">
-        
+    <table class = "table table-striped table-bordered table-hover align-middle text-center mb-1">
+        <thead>
+            <tr>
+                <th><a id="busModel" (click)="applySortTest($event)">Модель</a></th>
+                <th><a id="number" (click)="applySortTest($event)">Гос.номер</a></th>
+                <th><a id="seatsQty" (click)="applySortTest($event)">Мест</a></th>
+                <th><a id="vin" (click)="applySortTest($event)">VIN</a></th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let bus of buses" >
+                <td> {{ bus.busModel }} </td>
+                <td> {{ bus.number }} </td>
+                <td> {{ bus.seatsQty }} </td>
+                <td> {{ bus.vin }} </td>
+                <td>
+                    <button (click) = "navigateUpdate(bus.busId)" class = "btn btn-primary">Изменить</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col">
+            
+        </div>
+        <div class="col-3 text-end">
+            <button (click) = "saveTable()" class = "btn btn-primary">Экспорт</button>
+        </div>
     </div>
-    <div class="col-3 text-end">
-        <button (click) = "saveTable()" class = "btn btn-primary">Экспорт</button>
-    </div>
-</div>
+  </div>

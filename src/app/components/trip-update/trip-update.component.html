@@ -1,82 +1,87 @@
-<div class="row">
-    <div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4">
-        <div class="row">
-            <h3 class="text-center">Изменить рейс</h3>
-            <hr />
-            <form name="form" (ngSubmit)="f.form.valid && onSubmit($event)" #f="ngForm" novalidate>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="routeByRouteId">Маршрут</label>
-                    <input class="form-control" list="routeDataList" id="routeByRouteId"
-                        placeholder="Введите для поиска..." [(ngModel)]="routeStr" name="routeStr">
-                    <datalist id="routeDataList">
-                        <option *ngFor = "let route of routes" [value]="route.routeId">{{ route.routeId }}</option>
-                    </datalist>
-                </div>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="dateStr">Дата рейса</label>
-                    <div class="row">
-                        <div class="col">
-                            <input type="date" class="form-control" name="dateStr" [(ngModel)]="form1.dateStr"
-                         maxlength="10" #dateStr="ngModel" />
+<div *ngIf="!isLoggedIn">
+    <app-no-access></app-no-access>
+</div>
+<div *ngIf="isLoggedIn">
+    <div class="row">
+        <div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4">
+            <div class="row">
+                <h3 class="text-center">Изменить рейс</h3>
+                <hr />
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit($event)" #f="ngForm" novalidate>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="routeByRouteId">Маршрут</label>
+                        <input class="form-control" list="routeDataList" id="routeByRouteId"
+                            placeholder="Введите для поиска..." [(ngModel)]="routeStr" name="routeStr">
+                        <datalist id="routeDataList">
+                            <option *ngFor = "let route of routes" [value]="route.routeId">{{ route.routeId }}</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="dateStr">Дата рейса</label>
+                        <div class="row">
+                            <div class="col">
+                                <input type="date" class="form-control" name="dateStr" [(ngModel)]="form1.dateStr"
+                             maxlength="10" #dateStr="ngModel" />
+                            </div>
+                            <div class="col">
+                                <input type="time" class="form-control" name="timeStr" [(ngModel)]="form1.timeStr"
+                                maxlength="8" #timeStr="ngModel" />
+                            </div>
                         </div>
-                        <div class="col">
-                            <input type="time" class="form-control" name="timeStr" [(ngModel)]="form1.timeStr"
-                            maxlength="8" #timeStr="ngModel" />
+                        <div class="alert-danger text-center" *ngIf="dateStr.errors && f.submitted">
+                            <div *ngIf="dateStr.errors['maxlength']">
+                                Дата рейса должна быть длиной менее 16 символов
+                            </div>
+                        </div>
+                        <div class="alert-danger text-center" *ngIf="timeStr.errors && f.submitted">
+                            <div *ngIf="timeStr.errors['maxlength']">
+                                Время рейса должно быть длиной менее 8 символов
+                            </div>
                         </div>
                     </div>
-                    <div class="alert-danger text-center" *ngIf="dateStr.errors && f.submitted">
-                        <div *ngIf="dateStr.errors['maxlength']">
-                            Дата рейса должна быть длиной менее 16 символов
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="price">Цена</label>
+                        <input type="number" class="form-control" name="price" [(ngModel)]="trip.price" required min="0.0"
+                            #price="ngModel" />
+                        <div class="alert-danger text-center" *ngIf="price.errors && f.submitted">
+                            <div *ngIf="price.errors['required']">Цена необходима</div>
+                            <div *ngIf="price.errors['min']">Цена должна быть положительна</div>
                         </div>
                     </div>
-                    <div class="alert-danger text-center" *ngIf="timeStr.errors && f.submitted">
-                        <div *ngIf="timeStr.errors['maxlength']">
-                            Время рейса должно быть длиной менее 8 символов
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="userByUserId">Водитель</label>
+                        <input class="form-control" list="userDataList" id="userByUserId"
+                            placeholder="Введите для поиска..." [(ngModel)]="userStr" name="userStr">
+                        <datalist id="userDataList">
+                            <option *ngFor = "let user of users" [value]="user.lastName + ' ' + user.firstName + ' ' + user.surName">{{ user.lastName + ' ' + user.firstName + ' ' + user.surName }}</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="busByBusId">Автобус</label>
+                        <input class="form-control" list="busDataList" id="busByBusId"
+                            placeholder="Введите для поиска..." [(ngModel)]="busStr" name="busStr">
+                        <datalist id="busDataList">
+                            <option *ngFor = "let bus of buses" [value]="bus.busModel + ' ' + bus.number">{{ bus.busModel + ' ' + bus.number }}</option>
+                        </datalist>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col text-center">
+                            <button class="btn btn-primary btn-block mt-4 text-center">Сохранить</button>
+                        </div>
+                        <div class="col text-center">
+                            <button class="btn btn-primary btn-block btn-danger mt-4 text-center" (click)="delete()">Удалить</button>
                         </div>
                     </div>
-                </div>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="price">Цена</label>
-                    <input type="number" class="form-control" name="price" [(ngModel)]="trip.price" required min="0.0"
-                        #price="ngModel" />
-                    <div class="alert-danger text-center" *ngIf="price.errors && f.submitted">
-                        <div *ngIf="price.errors['required']">Цена необходима</div>
-                        <div *ngIf="price.errors['min']">Цена должна быть положительна</div>
+                    <div class="alert alert-warning my-2" *ngIf="f.submitted && !isSuccessful">
+                        Ошибка:<br />{{ errorMessage }}
                     </div>
-                </div>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="userByUserId">Водитель</label>
-                    <input class="form-control" list="userDataList" id="userByUserId"
-                        placeholder="Введите для поиска..." [(ngModel)]="userStr" name="userStr">
-                    <datalist id="userDataList">
-                        <option *ngFor = "let user of users" [value]="user.lastName + ' ' + user.firstName + ' ' + user.surName">{{ user.lastName + ' ' + user.firstName + ' ' + user.surName }}</option>
-                    </datalist>
-                </div>
-                <div class="form-group text-start">
-                    <label class="ms-1 my-1" for="busByBusId">Автобус</label>
-                    <input class="form-control" list="busDataList" id="busByBusId"
-                        placeholder="Введите для поиска..." [(ngModel)]="busStr" name="busStr">
-                    <datalist id="busDataList">
-                        <option *ngFor = "let bus of buses" [value]="bus.busModel + ' ' + bus.number">{{ bus.busModel + ' ' + bus.number }}</option>
-                    </datalist>
-                </div>
-                <div class="row form-group">
-                    <div class="col text-center">
-                        <button class="btn btn-primary btn-block mt-4 text-center">Сохранить</button>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn btn-primary btn-block btn-danger mt-4 text-center" (click)="delete()">Удалить</button>
-                    </div>
-                </div>
-                <div class="alert alert-warning my-2" *ngIf="f.submitted && !isSuccessful">
-                    Ошибка:<br />{{ errorMessage }}
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div>
-        <p class="text-center fw-light my-2 text-decoration-underline">
-            <a (click)="navigateToList()">Вернуться</a>
-        </p>
+        <div>
+            <p class="text-center fw-light my-2 text-decoration-underline">
+                <a (click)="navigateToList()">Вернуться</a>
+            </p>
+        </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { Route } from 'src/app/models/route.model';
 import { BusstopService } from 'src/app/_services/busstop.service';
 import { RouteService } from 'src/app/_services/route.service';
 import { RoutebusstopService } from 'src/app/_services/routebusstop.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-route-update',
@@ -24,10 +25,16 @@ export class RouteUpdateComponent implements OnInit {
 
   isSuccessful = false;
   errorMessage = '';
+  
+  isLoggedIn = false;
 
-  constructor(private routeService: RouteService, private routeBusstopService: RoutebusstopService, private busstopService: BusstopService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private tokenStorageService: TokenStorageService, private routeService: RouteService, private routeBusstopService: RoutebusstopService, private busstopService: BusstopService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
     this.id = this.activatedRoute.snapshot.params['id'];
 
     this.routeService.getById(this.id).subscribe({

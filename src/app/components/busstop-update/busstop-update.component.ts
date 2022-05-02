@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { City } from 'src/app/models/city.model';
 import { BusstopService } from 'src/app/_services/busstop.service';
 import { CityService } from 'src/app/_services/city.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-busstop-update',
@@ -26,9 +27,15 @@ export class BusstopUpdateComponent implements OnInit {
   isSuccessful = false;
   errorMessage = '';
 
-  constructor(private busstopService: BusstopService, private cityService: CityService, private route: ActivatedRoute, private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private tokenStorageService: TokenStorageService, private busstopService: BusstopService, private cityService: CityService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken() 
+    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
     this.cityService.getAll().subscribe({
       next: data => {
         this.cities = data;        
