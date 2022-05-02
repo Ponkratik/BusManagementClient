@@ -65,8 +65,7 @@ export class TripAddComponent implements OnInit {
     this.form.routeByRouteId = this.routes!.filter((route: Route) => route.routeId === Number.parseInt(event.target.routeByRouteId.value))[0];
     this.form.userByUserId = this.users!.filter((user: User) => user.lastName + ' ' + user.firstName + ' ' + user.surName === event.target.userByUserId.value)[0];
     this.form.busByBusId = this.buses!.filter((bus: Bus) => bus.busModel + ' ' + bus.number === event.target.busByBusId.value)[0];
-    this.form.depTime = this.form1.dateStr + 'T' + this.form1.timeStr + ':00';
-
+    this.form.depTime = new Date(Date.parse(this.form1.dateStr + 'T' + this.form1.timeStr + ':00.000+03:00'));
     this.save();
   }
 
