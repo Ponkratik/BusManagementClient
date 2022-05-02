@@ -22,6 +22,7 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
 import { TripUpdateComponent } from './components/trip-update/trip-update.component';
 import { TripAddComponent } from './components/trip-add/trip-add.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NoAccessComponent } from './components/no-access/no-access.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'tripmanagement', component: TripListComponent },
   { path: 'tripmanagement/update/:id', component: TripUpdateComponent },
   { path: 'tripmanagement/add', component: TripAddComponent },
+  { path: 'noaccess', component: NoAccessComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
