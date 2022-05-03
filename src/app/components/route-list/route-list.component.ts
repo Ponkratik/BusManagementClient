@@ -56,6 +56,9 @@ export class RouteListComponent implements OnInit {
 
   selectRouteRow(routeId: number) {
     this.getAllBusstopsByRouteId(routeId);
+    /*this.allStops?.forEach((stop: Routebusstop) => {
+      stop.timeDelta.hours -= 3;
+    });*/
   }
 
   saveTable() {

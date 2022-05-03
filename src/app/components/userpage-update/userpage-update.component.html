@@ -3,13 +3,13 @@
 </div>
 <div *ngIf="isLoggedIn">
     <div class="row">
-        <div class="card col-md-6 offset-md-3 offset-md-3">
+        <div class="card col-md-6 offset-md-3 offset-md-3 text-center p-4 mt-4 shadow-lg">
             <div class="row">
                 <h3 class="text-center">Обновить пользователя</h3>
                 <hr />
                 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                    <div class="form-group">
-                        <label for="login">Логин</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="login">Логин</label>
                         <input type="text" class="form-control" name="login" [(ngModel)]="user.login" required minlength="3"
                             maxlength="40" #login="ngModel" />
                         <div class="alert-danger" *ngIf="login.errors && f.submitted">
@@ -22,8 +22,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="email">Email</label>
                         <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required email
                             #email="ngModel" />
                         <div class="alert-danger" *ngIf="email.errors && f.submitted">
@@ -33,37 +33,37 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="lastName">Фамилия</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="lastName">Фамилия</label>
                         <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" required
                             #lastName="ngModel" />
                         <div class="alert-danger" *ngIf="lastName.errors && f.submitted">
                             <div *ngIf="lastName.errors['required']">Фамилия необходима</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="firstName">Имя</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="firstName">Имя</label>
                         <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" required
                             #firstName="ngModel" />
                         <div class="alert-danger" *ngIf="firstName.errors && f.submitted">
                             <div *ngIf="firstName.errors['required']">Имя необходимо</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="surName">Отчество</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="surName">Отчество</label>
                         <input type="text" class="form-control" name="surName" [(ngModel)]="user.surName"
                             #surName="ngModel" />
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Телефон</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="phone">Телефон</label>
                         <input type="tel" class="form-control" name="phone" [(ngModel)]="user.phone" required
                             #email="ngModel" />
                         <div class="alert-danger" *ngIf="email.errors && f.submitted">
                             <div *ngIf="email.errors['required']">Телефон необходим</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="roleName">Роль</label>
+                    <div class="form-group text-start">
+                        <label class="ms-1 my-1" for="roleName">Роль</label>
                         <input type="text" class="form-control" name="roleName" [(ngModel)]="user.roleByRoleId.roleName"
                             required #roleName="ngModel" />
                         <div class="alert-danger" *ngIf="roleName.errors && f.submitted">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-block">Обновить данные</button>
+                        <button class="btn btn-primary btn-block mt-4 text-center">Обновить данные</button>
                     </div>
                     <div class="alert alert-warning" *ngIf="f.submitted && !isSuccessful">
                         Обновить данные не удалось:<br />{{ errorMessage }}

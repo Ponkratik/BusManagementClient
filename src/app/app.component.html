@@ -1,65 +1,72 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">BusManagement</a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Главная</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && isSysadmin">
-      <li class="nav-item">
-        <a href="/usermanagement" class="nav-link" routerLink="usermanagement">Пользователи</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isGaragemanager)">
-      <li class="nav-item">
-        <a href="/busmanagement" class="nav-link" routerLink="busmanagement">Автобусы</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
-      <li class="nav-item">
-        <a href="/citymanagement" class="nav-link" routerLink="citymanagement">Города</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
-      <li class="nav-item">
-        <a href="/busstopmanagement" class="nav-link" routerLink="busstopmanagement">Остановки</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
-      <li class="nav-item">
-        <a href="/routemanagement" class="nav-link" routerLink="routemanagement">Маршруты</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
-      <li class="nav-item">
-        <a href="/tripmanagement" class="nav-link" routerLink="tripmanagement">Рейсы</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item">
-          <div class="text-light">
-            {{ date | async | date:'HH:mm:ss dd.MM.yyyy' }}
-          </div>
-      </li>
-    </ul>
-    <ul class="navbar-nav ms-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/signin" class="nav-link" routerLink="signin">Вход</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Аккаунт
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="profileDropdownMenuLink">
-          <li><a href="/mytrips" class="dropdown-item" routerLink="mytrips">Мои поездки</a></li>
-          <li><a href="/profile" class="dropdown-item" routerLink="profile">{{ storedUser.login }}</a></li>
-          <li><a href class="dropdown-item" (click)="logout()">Выход</a></li>
+  <nav class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="#" class="navbar-brand text-white">BusManagement</a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/home" class="nav-link px-2" routerLink="home">Главная</a>
+          </li>
         </ul>
-      </li>
-    </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && isSysadmin">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/usermanagement" class="nav-link px-2" routerLink="usermanagement">Пользователи</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isGaragemanager)">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/busmanagement" class="nav-link px-2" routerLink="busmanagement">Автобусы</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/citymanagement" class="nav-link px-2" routerLink="citymanagement">Города</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/busstopmanagement" class="nav-link px-2" routerLink="busstopmanagement">Остановки</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/routemanagement" class="nav-link px-2" routerLink="routemanagement">Маршруты</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && (isSysadmin || isDispatcher)">
+          <li class="nav-item" routerLinkActive="active">
+            <a href="/tripmanagement" class="nav-link px-2" routerLink="tripmanagement">Рейсы</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <div class="text-light">
+              {{ date | async | date:'HH:mm:ss dd.MM.yyyy' }}
+            </div>
+          </li>
+        </ul>
+        <div class="text-end">
+          <ul class="navbar-nav ms-auto" *ngIf="!isLoggedIn">
+            <li class="nav-item">
+              <a href="/signin" class="nav-link" routerLink="signin">Вход</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Аккаунт
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdownMenuLink">
+                <li><a href="/mytrips" class="dropdown-item text-black" routerLink="mytrips">Мои поездки</a></li>
+                <li><a href="/profile" class="dropdown-item text-black" routerLink="profile">{{ storedUser.login }}</a></li>
+                <li><a href class="dropdown-item text-secondary" (click)="logout()">Выход</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </nav>
   <div class="container">
     <router-outlet></router-outlet>

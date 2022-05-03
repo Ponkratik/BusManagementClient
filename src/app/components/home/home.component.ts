@@ -8,7 +8,6 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-
   isLoggedIn = false;
 
   constructor(private tokenStorageService: TokenStorageService, private router: Router) { }

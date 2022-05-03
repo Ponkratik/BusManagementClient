@@ -28,11 +28,11 @@ export class RouteAddComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService, private routeService: RouteService, private routeBusstopService: RoutebusstopService, private busstopService: BusstopService, private router: Router) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken() 
-    && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
-    || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
-    
-    
+    this.isLoggedIn = !!this.tokenStorageService.getToken()
+      && (this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_DISPATCHER"
+        || this.tokenStorageService.getUser().roleByRoleId[0].roleName === "ROLE_SYSADMIN");
+
+
     this.busstopService.getAll().subscribe({
       next: data => {
         this.restBusstops = data;
@@ -63,43 +63,40 @@ export class RouteAddComponent implements OnInit {
     this.routeService.add(this.route).subscribe({
       next: data => {
         this.isSuccessful = true;
-        this.navigateToList();
+
+        let arr: any = [];
+        for (let i = 0; i < this.selectedBusstops.length; i++) {
+          let form: any = {
+            order: 0,
+            busstopByStopId: null,
+            timeDelta: '',
+            routeByRouteId: null
+          }
+
+          form.order = i + 1;
+          form.busstopByStopId = this.selectedBusstops[i];
+          form.timeDelta = `${this.selectedDeltas[i]}:00`;
+          form.routeByRouteId = this.route;
+
+          arr.push(form);
+        }
+
+        this.routeBusstopService.updateById(this.route.routeId, arr).subscribe({
+          next: data => {
+            this.isSuccessful = true;
+            this.navigateToList();
+          },
+          error: error => {
+            this.isSuccessful = false;
+            this.errorMessage = error.error.message;
+          }
+        });
       },
       error: error => {
         this.isSuccessful = false;
         this.errorMessage = error.error.message;
       }
     });
-
-    let arr: any = [];
-    for(let i = 0; i < this.selectedBusstops.length; i++) {
-      let form: any = {
-        order: 0,
-        busstopByStopId: null,
-        timeDelta: '',
-        routeByRouteId: null
-      }
-
-      form.order = i + 1;
-      form.busstopByStopId = this.selectedBusstops[i];
-      form.timeDelta = `${this.selectedDeltas[i]}:00`;
-      form.routeByRouteId = this.route;
-
-      arr.push(form);
-    }
-
-    this.routeBusstopService.updateById(this.route.routeId, arr).subscribe({
-      next: data => {
-        this.isSuccessful = true;
-        this.navigateToList();
-      },
-      error: error => {
-        this.isSuccessful = false;
-        this.errorMessage = error.error.message;
-      }
-    });
-
-    this.navigateToList();
   }
 
   navigateToList() {
