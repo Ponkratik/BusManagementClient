@@ -53,7 +53,6 @@ export class RouteListComponent implements OnInit {
       next: data => {
         this.allStops = data;
         this.isStopsRecieved = true;
-        console.log(data);
       },
       error: error => {
 

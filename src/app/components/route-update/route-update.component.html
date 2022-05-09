@@ -86,7 +86,7 @@
                             <tr *ngFor = "let stop of selectedBusstops; let i = index">
                                 <td> {{ i + 1 }} </td>
                                 <td>
-                                    <input type="time" class="form-control" name="delta" [(ngModel)]="selectedDeltas[i]"/>
+                                    <input type="time" class="form-control" name="delta" [(ngModel)]="selectedDeltasStr[i]"/>
                                 </td>
                                 <td> {{ stop.stopName }} </td>
                                 <td> {{ stop.cityByCityId.cityName }} </td>

@@ -22,6 +22,7 @@ export class RouteUpdateComponent implements OnInit {
   restBusstops: Busstop[] = [];
   selectedBusstops: Busstop[] = [];
   selectedDeltas: Date[] = [];
+  selectedDeltasStr: string[] = [];
 
   isSuccessful = false;
   errorMessage = '';
@@ -55,6 +56,9 @@ export class RouteUpdateComponent implements OnInit {
         routebusstops.forEach(element => {
           this.selectedBusstops.push(element.busstopByStopId);
           this.selectedDeltas.push(element.timeDelta);
+          let d: Date = new Date(element.timeDelta);
+          d.setHours(d.getHours() + 3);
+          this.selectedDeltasStr.push(d.toISOString().substring(11, 16));
         });
       }
     });
@@ -117,11 +121,7 @@ export class RouteUpdateComponent implements OnInit {
 
       form.order = i + 1;
       form.busstopByStopId = this.selectedBusstops[i];
-      if (`${this.selectedDeltas[i]}`.length === 8) {
-        form.timeDelta = `${this.selectedDeltas[i]}`;
-      } else {
-        form.timeDelta = `${this.selectedDeltas[i]}:00`;
-      }
+      form.timeDelta = new Date(`1971-01-02T${this.selectedDeltasStr[i]}:00.000+03:00`);
       form.routeByRouteId = this.route;
 
       arr.push(form);
