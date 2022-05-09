@@ -1,8 +1,10 @@
-<div id="app">
+<div id="app" class="app">
   <nav class="p-3 bg-dark text-white">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="#" class="navbar-brand text-white">BusManagement</a>
+        <a href="#" class="navbar-brand text-white">
+          <img src="assets/img/navLogo.png" alt="" height="32">
+        </a>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" routerLinkActive="active">
             <a href="/home" class="nav-link px-2" routerLink="home">Главная</a>
@@ -40,14 +42,14 @@
         </ul>
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <div class="text-light">
+            <div class="">
               {{ date | async | date:'HH:mm:ss dd.MM.yyyy' }}
             </div>
           </li>
         </ul>
         <div class="text-end">
           <ul class="navbar-nav ms-auto" *ngIf="!isLoggedIn">
-            <li class="nav-item">
+            <li class="nav-item" routerLinkActive="active">
               <a href="/signin" class="nav-link" routerLink="signin">Вход</a>
             </li>
           </ul>

@@ -43,11 +43,15 @@ export class UserpageComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    this.userService.delete(id).subscribe(
-      data => {
-        this.getAllUsers();
-      }
-    )
+    if (id === this.tokenStorageService.getUser().userId) {
+
+    } else {
+      this.userService.delete(id).subscribe(
+        data => {
+          this.getAllUsers();
+        }
+      );
+    }  
   }
 
   saveTable() {
