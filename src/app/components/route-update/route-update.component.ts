@@ -21,7 +21,7 @@ export class RouteUpdateComponent implements OnInit {
   displayStopEditForm = false;
   restBusstops: Busstop[] = [];
   selectedBusstops: Busstop[] = [];
-  selectedDeltas: Time[] = [];
+  selectedDeltas: Date[] = [];
 
   isSuccessful = false;
   errorMessage = '';

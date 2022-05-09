@@ -6,5 +6,5 @@ export class Routebusstop {
     routeByRouteId!: Route;
     busstopByStopId!: Busstop;
     order!: number;
-    timeDelta!: Time;
+    timeDelta!: Date;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Route } from 'src/app/models/route.model';
 import { Routebusstop } from 'src/app/models/routebusstop.model';
 import { CsvexportService } from 'src/app/_services/csvexport.service';
@@ -21,6 +22,10 @@ export class RouteListComponent implements OnInit {
   sortDir?: boolean[] = [true, true, true];
 
   isLoggedIn = false;
+
+  isStopsRecieved: boolean = false;
+
+  isStopsRecievedChange: Subject<boolean> = new Subject<boolean>();
 
   constructor(private tokenStorageService: TokenStorageService, private routeService: RouteService, private routeBusstopService: RoutebusstopService, private csvExportService: CsvexportService, private router: Router) { }
 
@@ -47,6 +52,8 @@ export class RouteListComponent implements OnInit {
     this.routeBusstopService.getAllById(id).subscribe({
       next: data => {
         this.allStops = data;
+        this.isStopsRecieved = true;
+        console.log(data);
       },
       error: error => {
 
@@ -55,10 +62,19 @@ export class RouteListComponent implements OnInit {
   }
 
   selectRouteRow(routeId: number) {
+    this.isStopsRecieved = false;
     this.getAllBusstopsByRouteId(routeId);
-    /*this.allStops?.forEach((stop: Routebusstop) => {
-      stop.timeDelta.hours -= 3;
-    });*/
+  }
+
+  displayRouteOnMap(): ymaps.IMultiRouteReferencePoint[] {
+    
+
+    let points: ymaps.IMultiRouteReferencePoint[] = [];
+    this.allStops!.forEach((stop: Routebusstop) => {
+      points.push([stop.busstopByStopId.latitude, stop.busstopByStopId.longitude]);
+    });
+
+    return points;
   }
 
   saveTable() {

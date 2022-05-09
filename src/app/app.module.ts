@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularYandexMapsModule, YaConfig } from 'angular8-yandex-maps';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,12 @@ import { TripAddComponent } from './components/trip-add/trip-add.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { MapComponent } from './components/map/map.component';
+
+const mapConfig: YaConfig = {
+  apikey: "3c9786fa-a5a9-4687-9f70-1dc44b222297",
+  lang: "ru_RU",
+};
 
 @NgModule({
   declarations: [
@@ -55,13 +62,15 @@ import { MyTripsComponent } from './components/my-trips/my-trips.component';
     TripAddComponent,
     TripListComponent,
     NoAccessComponent,
-    MyTripsComponent
+    MyTripsComponent,
+    MapComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularYandexMapsModule.forRoot(mapConfig)
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

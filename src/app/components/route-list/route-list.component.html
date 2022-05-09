@@ -46,7 +46,7 @@
         <div class="col-1">
     
         </div>
-        <div class="col-4">
+        <div class="col-4"  *ngIf="allStops">
             <table class = "table table-striped table-bordered table-hover align-middle text-center mb-1 shadow-lg">
                 <thead>
                     <tr>
@@ -61,10 +61,16 @@
                         <td> {{ stop.order }} </td>
                         <td> {{ stop.busstopByStopId.stopName }} </td>
                         <td> {{ stop.busstopByStopId.cityByCityId.cityName }} </td>
-                        <td> {{ stop.timeDelta }}</td>
+                        <td> {{ stop.timeDelta | date:'HH:mm':'UTC+3' }}</td>
                     </tr>
                 </tbody>
             </table>
+            <div class="row text-end mx-1">
+                <button (click) = "mapComponent.changeGeoPoints(displayRouteOnMap())" class = "btn btn-primary">Маршрут</button>
+            </div>
         </div>
+    </div>
+    <div class="container my-4">
+        <app-map #mapComponent></app-map>
     </div>    
 </div>
